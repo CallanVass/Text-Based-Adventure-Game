@@ -8,6 +8,9 @@ class Character:
 class Inventory:
     pass
 
+class Notebook:
+    pass
+
 class Options:
     pass
 
