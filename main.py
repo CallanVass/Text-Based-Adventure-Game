@@ -12,11 +12,12 @@ import time
 # notebook.write_notebook()
 
 #Character Creation
-main_character = Character("Argus", 100, 0)
-#QUICKTIME EVENT
+main_character = Character("Argus")
+#QUICKTIME EVENT WORKING
 fight = Fight()
+fight.quick_time_event(main_character, 2, 30)
+main_character.check_stats()
 
-fight.quick_time_event(main_character, 2, 20)
 
 # #ADD ITEM
 # main_character.inv.add_item("Sheild")

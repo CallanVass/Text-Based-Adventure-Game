@@ -79,7 +79,6 @@ class Room:
 
 class Fight:
     def quick_time_event(self, character, time_limit, health_lost):
-        # print("Quickly! Press Enter to fight!")
         start = time.time()
         user_input = input("Quickly press Enter to fight back!")
         end = time.time()
@@ -89,8 +88,8 @@ class Fight:
         if user_input == "" and time_passed < time_limit:
             print("You kill them")
         else:
-            Character.lose_health(20)
-            print("You lose 20 health!")
+            character.lose_health(health_lost)
+            print(f"You lose {health_lost} health!")
 
 
 
