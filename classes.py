@@ -1,20 +1,52 @@
+from hueprint import cprint
+from hueprint.types import EColour, EEffect
+import time
+
+
+
 class Character:
-    def __init__(self, name, health, bloodlust):
+    def __init__(self, name):
         self.name = name
-        self.health = health
-        self.bloodlust = f"{bloodlust}/100"
+        self.health = 100
+        self.bloodglut = 0
         self.inv = Inventory()
     
-    def check_inventory(self):
-        print(self.inv)
+    def check_stats(self):
+        cprint(f"Health: {self.health}/100    Blood Glut: {self.bloodglut}/100", EColour.RED)
+        cprint(f"Inventory: {self.inv.get_items()}", EColour.CYAN)
+
+    def lose_health(self, health_loss):
+        self.health -= health_loss
+        return self.health
+
+    def add_blood_glut(self, amount):
+        self.bloodglut = self.bloodglut + amount
+        increase = f"Blood Glut has been increaded by {amount}!"
+        if self.bloodglut <= 20:
+            print(f"{increase} Dark desires writhe within you!")
+        elif self.bloodglut > 20 and self.bloodglut <= 50:
+             print(f"{increase} You grow stronger and an almost irresistable desire for blood awakens!")
+        elif self.bloodglut > 50 and self.bloodglut <= 65:
+             print(f"{increase} You're turning into an unkillable creature of nightmares!")
+        elif self.bloodglut > 65 and self.bloodglut <= 80:
+             print(f"{increase} You swelter with violent power. Soon you'll be lost to your human form forever!")
+        elif self.bloodglut > 80 and self.bloodglut <= 99:
+             print(f"{increase} Your humanity sinks deeper with every kill, drowned in the blood of your enemies! One more kill and you'll be lost to the dark forces of vampirism!")
+        else:
+            print(f"{increase} Darkness shrouds around you like torrent of black fire, hailing you as its new king!")
+
+
+        
 
 class Inventory:
     def __init__(self):
         self.items = []
 
-    def add_items(self, name):
-        items = Inventory
+    def add_item(self, name):
         self.items.append(name)
+
+    def get_items(self):
+        return self.items
     
 
 
@@ -44,5 +76,22 @@ class Main:
 class Room:
     def room_inventory(self):
         self.inv = Inventory([])
+
+class Fight:
+    def quick_time_event(self, character, time_limit, health_lost):
+        # print("Quickly! Press Enter to fight!")
+        start = time.time()
+        user_input = input("Quickly press Enter to fight back!")
+        end = time.time()
+        time_passed = end - start
+
+        #THIS IF STATEMENT MUST BE DONE PER CALL, AND FUNCTIONS ONLY AS A FRAMEWORK
+        if user_input == "" and time_passed < time_limit:
+            print("You kill them")
+        else:
+            Character.lose_health(20)
+            print("You lose 20 health!")
+
+
 
 
