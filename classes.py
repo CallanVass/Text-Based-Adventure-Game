@@ -33,22 +33,24 @@ class Character:
         else:
             print(f"{increase} Darkness shrouds around you like torrent of black fire, hailing you as its new king!")
 
-
-        
-
 class Inventory:
     def __init__(self):
         self.items = []
 
     def add_item(self, name):
         self.items.append(name)
-        print(f"You have picked up: {name}")
+        print(f"You have picked up: {name}!")
+
+    def remove_item(self, name):
+        self.items.remove(name)
+        print(f"You have lost: {name}!")
 
     def get_items(self):
         return self.items
     
-
-
+    def has_item(self, name):
+        return name in self.items
+    
 class Notebook:
     def read_notebook(self):
         with open("notebook.txt", "r") as file:
@@ -82,25 +84,6 @@ class Chance:
                 print("Your attempt succeeds!")
         if percentage == 4:
             print("Callan, you dolt, that's a stupidly high percentage. Change it right now.")
-        
-
-
-# class Scene(Character):
-#     def cell_scene(self):
-#         prompt = "What do you want to do?"
-#         prompt_list_1 = [main_character.check_stats(), 
-#                        "2 ", 
-#                        "3", 
-#                        "4"]
-
-#         for index, option in enumerate(prompt_list_1):
-#             print(f"Option {index + 1}: {option}")
-
-        # while True:
-        #     print("You awaken in a castle cell. Blood drips steadily from the bricks above, splashing into a rusty basin. The screams of distant prisoners fill the halls. (TODO. TAPTAPTAP.sleep(1)) In the corner is a pile of bones. Past prisoners.")
-        #     prompt
-        #     False
-
 
 class Options:
     pass
