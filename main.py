@@ -43,22 +43,19 @@ master_chambers = Room("Master Chambers", ["Master Key"])
 prompt = "What do you want to do?"
 
 def options(option_list):
+    cell.get_name()
     for index, option in enumerate(option_list):
         print(f"Option {index + 1}: {option}")
     return
-        
 
-# while True:
 #CELL LOGIC
-print("You awaken in a castle cell. Blood drips steadily from the bricks above, splashing into a rusty basin. The moans of distant prisoners fill the halls. (TODO. TAPTAPTAP.sleep(1)) In the corner is a pile of bones. Past prisoners.")
 
-
-print(f"You are currently in the {cell.get_name()}")
 
 cell_prompt_list_1_1 = ["Examine the pile of bones.", 
                 "Examine the bloody basin.", 
                 "Listen out to the calls of the prisoners.", 
-                "Examine bite marks."]
+                "Examine bite marks.",
+                "Try the cell door."]
 #"Examine the bloody basin."
 cell_prompt_list_2 = ["Examine the pile of bones.", 
                 "Examine the bloody basin.", 
@@ -70,17 +67,28 @@ cell_prompt_list_3 = ["Examine the pile of bones.",
                 "Listen out to the calls of the prisoners.", 
                 "Examine bite marks."]
 #Examine bite marks.
-cell_prompt_list_4 = ["Examine the pile of bones.", 
+cell_prompt_list_4 = ["You reach your arms up, looking closely at the bite marks made by Dracula. You seethe..."]
+cell_prompt_list_4_1 = []
+cell_prompt_list_4_2 = ["Examine the pile of bones.", 
                 "Examine the bloody basin.", 
                 "Listen out to the calls of the prisoners.", 
                 "Examine bite marks."]
 
+def display_stats():
+    print(main_character.check_stats())
+    print(prompt)
+    return
 
-print(main_character.check_stats())
-print(prompt)
-options(cell_prompt_list_1_1)
-
-input()
-# if input() == "1":
-options(cell_prompt_list_2)
+print("You awaken in a castle cell. Blood drips steadily from the bricks above, splashing into a rusty basin. The moans of distant prisoners fill the halls. (TODO. TAPTAPTAP.sleep(1)) In the corner is a pile of bones. Past prisoners.")
+time.sleep(10)
+while True:
+    display_stats()
+    options(cell_prompt_list_1_1)
+    user_input = input(">>>")
+    
+    while user_input == "4":
+        print("You reach your arms up, looking closely at the bite marks made by Dracula. You think of the countless times you've been fed on and you seethe...")
+        time.sleep(6)
+        break
+    
 

@@ -111,7 +111,7 @@ class Room:
         self.name = name   
     
     def get_name(self):
-        return self.name
+        print(f"You are currently in the {self.name}.")
 
 class Fight:
     def quick_time_event(self, character, time_limit, health_lost):
