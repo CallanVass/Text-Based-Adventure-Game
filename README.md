@@ -1,6 +1,6 @@
 # Text-Based-Adventure-Game
 
-# ==================================**Spoilers Ahead**===========================================
+# **Spoilers Ahead**
 
 
 ## R3 Bibliography/References:
