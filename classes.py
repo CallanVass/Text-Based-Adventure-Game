@@ -1,6 +1,5 @@
-from hueprint import cprint
-from hueprint.types import EColour, EEffect
 import time
+import random
 
 
 
@@ -12,8 +11,8 @@ class Character:
         self.inv = Inventory()
     
     def check_stats(self):
-        cprint(f"Health: {self.health}/100    Blood Glut: {self.bloodglut}/100", EColour.RED)
-        cprint(f"Inventory: {self.inv.get_items()}", EColour.CYAN)
+        print(f"Health: {self.health}/100    Blood Glut: {self.bloodglut}/100")
+        print(f"Inventory: {self.inv.get_items()}")
 
     def lose_health(self, health_loss):
         self.health -= health_loss
@@ -21,7 +20,7 @@ class Character:
 
     def add_blood_glut(self, amount):
         self.bloodglut = self.bloodglut + amount
-        increase = f"Blood Glut has been increaded by {amount}!"
+        increase = f"Blood Glut has been increased by {amount}!"
         if self.bloodglut <= 20:
             print(f"{increase} Dark desires writhe within you!")
         elif self.bloodglut > 20 and self.bloodglut <= 50:
@@ -44,6 +43,7 @@ class Inventory:
 
     def add_item(self, name):
         self.items.append(name)
+        print(f"You have picked up: {name}")
 
     def get_items(self):
         return self.items
