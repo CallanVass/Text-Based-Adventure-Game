@@ -18,8 +18,8 @@ main_character = Character("Argus")
 
 #CHANCE OF AN EVENT WORKING
 chance = Chance()
-
 chance.chance_of_success(3)
+
 # #ADD ITEM
 # main_character.inv.add_item("Sheild")
 # #DISPLAY STATS
