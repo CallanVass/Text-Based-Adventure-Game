@@ -64,7 +64,8 @@ cell_prompt_list_1_1 = ["Examine the pile of bones.",
                 "Try the cell door.",]
                 #Original option: "Try the cell door."
 cell_prompt_list_1_2 = ["Snap a femur and shave it down to a sizeable 'key'", 
-                        "Whittle a splinter of bone down to a needle for... engraving."]
+                        "Whittle a splinter of bone down to a needle for... engraving.",
+                        "Go back"]
 #"Examine the bloody basin."
 cell_prompt_list_2_1 = ["Take a sip",
                       "Look underneath",
@@ -93,6 +94,7 @@ while True:
     display_stats()
     options(cell_prompt_list_1_1)
     user_input = input(">>>")
+    # TODO: MAKETHIS A FUNCTION INCLUDING ALL USER INPUTS
     if main_character.inv.has_item("Bone Pen"):
         if "write" or "Write" in user_input:
             append_arm()
@@ -106,7 +108,7 @@ while True:
             break
         elif main_character.bloodglut >= 20:
             options(cell_prompt_list_1_2)
-            user_input = input(">>>")
+            user_input_1_2 = input(">>>")
             while user_input == "1":
                 if main_character.inv.has_item("Bone Key"):
                     print("You've already done this.")
@@ -114,7 +116,8 @@ while True:
                 else:
                     print("It takes some doing, but you manage to snap it in half.")
                     main_character.inv.add_item("Bone Key")
-            while user_input == "2":
+                    break
+            while user_input_1_2 == "2":
                 if main_character.inv.has_item("Bone Pen"):
                     print("You've already done this.")
                     break
@@ -122,6 +125,10 @@ while True:
                     print("Time drags on, but eventually you make a pen for... writing.")
                     print("HINT: Type 'Write' into the terminal to carve text into your arm.")
                     main_character.inv.add_item("Bone Pen")
+                    break
+            while user_input_1_2 == "3":
+                print("You go back.")
+                break
 
     while user_input == "2":
         print("You check the basin. The blood is as much mud as it is blood. You revolt.")
