@@ -11,8 +11,7 @@ class Character:
         self.inv = Inventory()
     
     def check_stats(self):
-        print(f"Health: {self.health}/100    Blood Glut: {self.bloodglut}/100")
-        print(f"Inventory: {self.inv.get_items()}")
+        return f"Health: {self.health}/100    Blood Glut: {self.bloodglut}/100\nInventory: {self.inv.get_items()}"
 
     def lose_health(self, health_loss):
         self.health -= health_loss
@@ -86,17 +85,33 @@ class Chance:
         
 
 
-class Main:
-    pass
+# class Scene(Character):
+#     def cell_scene(self):
+#         prompt = "What do you want to do?"
+#         prompt_list_1 = [main_character.check_stats(), 
+#                        "2 ", 
+#                        "3", 
+#                        "4"]
+
+#         for index, option in enumerate(prompt_list_1):
+#             print(f"Option {index + 1}: {option}")
+
+        # while True:
+        #     print("You awaken in a castle cell. Blood drips steadily from the bricks above, splashing into a rusty basin. The screams of distant prisoners fill the halls. (TODO. TAPTAPTAP.sleep(1)) In the corner is a pile of bones. Past prisoners.")
+        #     prompt
+        #     False
+
 
 class Options:
     pass
 
 class Room:
-    def __init__(self, name, items):
-        pass
-    def room_inventory(self):
-        self.inv = Inventory([])
+    def __init__(self, name, inv):
+        self.inv = Inventory()
+        self.name = name   
+    
+    def get_name(self):
+        return self.name
 
 class Fight:
     def quick_time_event(self, character, time_limit, health_lost):
@@ -105,7 +120,6 @@ class Fight:
         end = time.time()
         time_passed = end - start
 
-        #THIS IF STATEMENT MUST BE DONE PER CALL, AND FUNCTIONS ONLY AS A FRAMEWORK
         if user_input == "" and time_passed < time_limit:
             print("You kill them")
         else:
