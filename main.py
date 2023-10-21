@@ -10,8 +10,8 @@ def append_arm():
     return
 
 #OPTIONS FUNCTION
-def options(option_list):
-    cell.get_name()
+def options(option_list, room):
+    room.get_name()
     for index, option in enumerate(option_list):
         print(f"Option {index + 1}: {option}")
     return
@@ -72,7 +72,6 @@ cell_prompt_list_1_1 = ["Examine the pile of bones.",
                 "Listen out to the calls of the prisoners.", 
                 "Examine bite marks.",
                 "Exit the cell door.",]
-                #Original option: "Try the cell door."
 cell_prompt_list_1_2 = ["Snap a femur and shave it down to a sizeable 'key'", 
                         "Whittle a splinter of bone down to a needle for... engraving.",
                         "Go back"]
@@ -89,19 +88,30 @@ cell_room_prompt_list_1_1 = ["Enter Treasury Room.",
                              "Try the door to freedom",
                              "Check engraving on the door.",
                              "Go back into the Cell"]
-
-
-
+#TREASURY LOGIC
+treasury_prompt_list_1_1 = ["Drain the servant",
+                             "Examine the gold coins",
+                             "Knock the servant unconscious",
+                             "Examine door at the back of the room",
+                             "Go back to the Jail."]
+#Examine the gold coins
+treasury_prompt_list_1_2 = ["Bite the coin.",
+                             "Forge a key out of the gold coins.",
+                             "Go back.",]
 
 cell_door_open = False
 prisoners_free = False
+servant_killed = False
+servant_unconscious = False
+tresury_entered = False
+
 print("You awaken in a castle cell. Blood drips steadily from the bricks above, splashing into a rusty basin. The moans of distant prisoners fill the halls. (TODO. TAPTAPTAP.sleep(1)) In the corner is a pile of bones. Past prisoners.")
 print("The bite marks on your body are from him: Dracula. You're his personal blood bag.")
 print("Something's different, though. Your bite marks are healing, and the strength in your limbs wills you to fight back. What's happening to you?")
 time.sleep(1)
 while True:
     display_stats()
-    options(cell_prompt_list_1_1)
+    options(cell_prompt_list_1_1, cell)
     user_input = input(">>> ")
     # TODO: MAKETHIS A FUNCTION INCLUDING ALL USER INPUTS
     if main_character.inv.has_item("Bone Pen"):
@@ -115,7 +125,7 @@ while True:
             print("Poor chap, you think. Lazily, your eyes drift over to the cell door, then back to the bones. Hmmm... If only you were stronger...")
             break
         elif main_character.bloodglut >= 20:
-            options(cell_prompt_list_1_2)
+            options(cell_prompt_list_1_2, cell)
             user_input_1_2 = input(">>> ")
             while user_input_1_2 == "1":
                 if main_character.inv.has_item("Bone Key"):
@@ -140,7 +150,7 @@ while True:
 
     while user_input == "2":
         print("You check the basin. The blood is as much mud as it is blood. You revolt.")
-        options(cell_prompt_list_2_1)
+        options(cell_prompt_list_2_1, cell)
         user_input_2_1 = input(">>> ")
         while user_input_2_1 == "1":
             if main_character.bloodglut >= 20:
@@ -165,7 +175,6 @@ while True:
         time.sleep(1)
         break
     
-
     while user_input == "5":
         exit_cell_room = False
         if cell_door_open == True:
@@ -186,10 +195,63 @@ while True:
             break
         while cell_door_open and not exit_cell_room:
             display_stats()
-            options(cell_room_prompt_list_1_1)
+            options(cell_room_prompt_list_1_1, jail)
             cell_room_user_input = input(">>> ")
             while cell_room_user_input == "1":
-                pass
+                if tresury_entered == False:
+                    tresury_entered = True
+                    print("Silently, you enter a well lit room with piles upon piles of golden coins strewn about the place.")
+                    print("A blind servant sits at a rickety table, counting coins and placing them into bags.")
+                    display_stats()
+                    options(treasury_prompt_list_1_1, treasury)
+                    treasury_room_user_input = input(">>> ")
+                else:
+                    print("You're standing in the Treasury.")
+                    display_stats()
+                    options(treasury_prompt_list_1_1, treasury)
+                    treasury_room_user_input = input(">>> ")
+                while treasury_room_user_input == "1":
+                    if servant_killed == False:
+                        print("You sieze the servant, ripping into his neck and drinking deeply. With nobody to stop you,")
+                        print("you're able to drink your fill.")
+                        main_character.add_blood_glut(30)
+                        servant_killed = True
+                        break
+                    else:
+                        print("He can't get any dead-er than he is.")
+                        break
+                while treasury_room_user_input == "2":
+                    print("You examine the gold coins.")
+                    display_stats()
+                    options(treasury_prompt_list_1_2, treasury)
+                    treasury_room_user_input_1 = input(">>> ")
+                    while treasury_room_user_input_1 == "1":
+                        print("Your teeth sink straight through the metal. Yep, that's real gold alright.")
+                        break
+                    while treasury_room_user_input_1 == "2":
+                        if main_character.inv.has_item("Gold Key"):
+                            print("You've already done that.")
+                            break
+                        else:
+                            print("You grab a couple gold coins and get to work, compressing them like clay and fashioning yourself a key.")
+                            main_character.inv.add_item("Gold Key")
+                            break
+                    if treasury_room_user_input_1 == "3":
+                        break
+                while treasury_room_user_input == "3":
+                    if servant_unconscious == False:
+                        print("With a hard backhand, you clop the servant over the head. He falls to the ground,")
+                        print("moaning for a moment before going still. His wheezing breaths fill the chamber. How annoying.")
+                        servant_unconscious = True
+                        break
+                    else:
+                        print("He's already unconscious. Give the man a break.")
+                        break
+                while treasury_room_user_input == "4":
+                    #ADD DIGGING FUNCTION WITH CHANCE OF BEING DISCOVERED
+                    break
+                if treasury_room_user_input == "5":
+                    break
             while cell_room_user_input == "2":
                 if prisoners_free:
                     print("You've already done that.")
@@ -199,7 +261,6 @@ while True:
                     print("You go back and forth, forging bone-shaped keys and smashing them into the locks one by one.")
                     print("The prisoners have been freed! They huddle around the main door, too scared to do anything else.")
                     prisoners_free = True
-                    #Watch this logic for reoccuring instances (ability to do it multiple times)
                     break
                 elif main_character.bloodglut < 50:
                     print("You try and bend the bars, but they won't give. If only you were stronger...")
@@ -216,7 +277,7 @@ while True:
                     print("You open the Armoury door to find 3 guards, all with plate armour and weapons. They drop their drinks and draw their swords.")
                     #ARMOURY LOGIC GOES HERE
                 else:
-                    print("It appears you need a key to do that. Maybe you can make one?")
+                    print("It appears you need some sort of metal key to do that. Maybe you can make one?")
                     break
             while cell_room_user_input == "4":
                 if main_character.bloodglut < 65:
@@ -225,7 +286,8 @@ while True:
                 elif main_character.bloodglut > 65:
                         main_door_full_blood_glut_ending()
             while cell_room_user_input == "5":
-                print("MAIN DOOR ENGRAVING")
+                print("You step closer, reading the quote plainly with your imporved vision.")
+                print("'I'll tear spleens, defeat everything and this hell to get what I want.'")
                 break
             if cell_room_user_input == "6":
                 exit_cell_room = True
