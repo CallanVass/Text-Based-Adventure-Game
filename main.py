@@ -57,7 +57,7 @@ def main_door_full_blood_glut_ending():
 notebook = Notebook()
 main_character = Character("Argus")
 #ROOMS
-cell = Room("Cell", ["Bone Pen", "Bone Key"])
+cell = Room("Cell", [])
 jail = Room("Jail", [""])
 treasury = Room("Treasury", ["Gold key"])
 tunnel = Room("Tunnel", [""])
@@ -87,18 +87,19 @@ cell_room_prompt_list_1_1 = ["Enter Treasury Room.",
                              "Free the prisoners.",
                              "Enter Armoury.",
                              "Try the door to freedom",
+                             "Check engraving on the door.",
                              "Go back into the Cell"]
 
 
 
 
-
+cell_door_open = False
+prisoners_free = False
 print("You awaken in a castle cell. Blood drips steadily from the bricks above, splashing into a rusty basin. The moans of distant prisoners fill the halls. (TODO. TAPTAPTAP.sleep(1)) In the corner is a pile of bones. Past prisoners.")
 print("The bite marks on your body are from him: Dracula. You're his personal blood bag.")
 print("Something's different, though. Your bite marks are healing, and the strength in your limbs wills you to fight back. What's happening to you?")
 time.sleep(1)
 while True:
-    # cell_door_open = False
     display_stats()
     options(cell_prompt_list_1_1)
     user_input = input(">>> ")
@@ -108,7 +109,6 @@ while True:
             append_arm()
         else:
             pass
-
     while user_input == "1":
         if main_character.bloodglut < 20:
             print("You walk over to the pile of bones.")
@@ -165,61 +165,71 @@ while True:
         time.sleep(1)
         break
     
+
     while user_input == "5":
-        cell_door_open = False
-        if main_character.inv.has_item("Bone Key"):
-            if cell_door_open == True:
-                continue
+        exit_cell_room = False
+        if cell_door_open == True:
+            print("You step through the opened cell door.")
+        elif main_character.inv.has_item("Bone Key"):
             cell_door_open = True
             print("You jam the bone key into the cell door keyhole, breaking it but snapping the lock open at the same time. The door slides wide open and you step through into a hallway.")
             main_character.inv.remove_item("Bone Key")
             print("The prisoners moan and wail at you to let them out. To the left of you is a door labelled 'Treasury'. You can hear coins clinking behind it, but no speaking.")
             print("To your right is a door named 'Armoury'. Behind it, Dracula's guards laugh and joust.")
             print("Before you is a wide door that appears to lead outside.")
-            while True:
-                display_stats()
-                options(cell_room_prompt_list_1_1)
-                cell_room_user_input = input(">>> ")
-                while cell_room_user_input == "1":
-                    pass
-                while cell_room_user_input == "2":
-                    if main_character.bloodglut < 50:
-                        print("You try and bend the bars, but they won't give. If only you were stronger...")
-                        break
-                    elif main_character.inv.has_item("Bone Key"):
-                        print("You're resourceful, aren't you?")
-                        print("You go back and forth, forging bone-shaped keys and smashing them into the locks one by one.")
-                        print("The prisoners have been freed!")
-                        prisoners_free = True
-                        #Watch this logic for reoccuring instances (ability to do it multiple times)
-                        break
-                    elif prisoners_free == True:
-                        print("They're already free.")
-                    else:
-                        print("Strength swells within you. With your newfound might, you snap the bars off their hinges. ")
-                        print("The prisoners have been freed!")
-                        prisoners_free = True
-                        break
-                while cell_room_user_input == "3":
-                    if main_character.inv.has_item("Gold Key"):
-                        print("You open the Armoury door to find 3 guards, all with plate armour and weapons. They drop their drinks and draw their swords.")
-                        #ARMOURY LOGIC GOES HERE
-                    else:
-                        print("It appears you need a key to do that. Maybe you can make one?")
-                        break
-                while cell_room_user_input == "4":
-                    if main_character.bloodglut < 65:
-                        print("You need either the Master Key or the strength to brute force it.")
-                        break
-                    elif main_character.bloodglut > 65:
-                            main_door_full_blood_glut_ending()
-                if cell_room_user_input == "5":
-                    break
-                
-                
+            cell_door_opened_once = True
         else:
-            print("It's not particularly well built. If only we had some way to open it...")
+            if cell_door_opened_once:
+                print("You step through the cell door without needing a key.")
+            else:
+                print("It's not particularly well built. If only we had some way to open it...")
             break
+        while cell_door_open and not exit_cell_room:
+            display_stats()
+            options(cell_room_prompt_list_1_1)
+            cell_room_user_input = input(">>> ")
+            while cell_room_user_input == "1":
+                pass
+            while cell_room_user_input == "2":
+                if prisoners_free:
+                    print("You've already done that.")
+                    break
+                elif main_character.inv.has_item("Bone Key"):
+                    print("You're resourceful, aren't you?")
+                    print("You go back and forth, forging bone-shaped keys and smashing them into the locks one by one.")
+                    print("The prisoners have been freed! They huddle around the main door, too scared to do anything else.")
+                    prisoners_free = True
+                    #Watch this logic for reoccuring instances (ability to do it multiple times)
+                    break
+                elif main_character.bloodglut < 50:
+                    print("You try and bend the bars, but they won't give. If only you were stronger...")
+                    break
+                elif prisoners_free == True:
+                    print("They're already free.")
+                else:
+                    print("Strength swells within you. With your newfound might, you snap the bars off their hinges. ")
+                    print("The prisoners have been freed!")
+                    prisoners_free = True
+                    break
+            while cell_room_user_input == "3":
+                if main_character.inv.has_item("Gold Key"):
+                    print("You open the Armoury door to find 3 guards, all with plate armour and weapons. They drop their drinks and draw their swords.")
+                    #ARMOURY LOGIC GOES HERE
+                else:
+                    print("It appears you need a key to do that. Maybe you can make one?")
+                    break
+            while cell_room_user_input == "4":
+                if main_character.bloodglut < 65:
+                    print("You need either the Master Key or the strength to brute force it.")
+                    break
+                elif main_character.bloodglut > 65:
+                        main_door_full_blood_glut_ending()
+            while cell_room_user_input == "5":
+                print("MAIN DOOR ENGRAVING")
+                break
+            if cell_room_user_input == "6":
+                exit_cell_room = True
         
-    
-
+        if exit_cell_room:
+            break
+            
