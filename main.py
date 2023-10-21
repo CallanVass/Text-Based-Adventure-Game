@@ -61,7 +61,7 @@ cell_prompt_list_1_1 = ["Examine the pile of bones.",
                 "Examine the bloody basin.", 
                 "Listen out to the calls of the prisoners.", 
                 "Examine bite marks.",
-                "Try the cell door.",]
+                "Exit the cell door.",]
                 #Original option: "Try the cell door."
 cell_prompt_list_1_2 = ["Snap a femur and shave it down to a sizeable 'key'", 
                         "Whittle a splinter of bone down to a needle for... engraving.",
@@ -96,10 +96,10 @@ while True:
     user_input = input(">>>")
     # TODO: MAKETHIS A FUNCTION INCLUDING ALL USER INPUTS
     if main_character.inv.has_item("Bone Pen"):
-        if "write" or "Write" in user_input:
+        if user_input == "write" or user_input == "Write":
             append_arm()
         else:
-            print("Nothing happens.")
+            pass
 
     while user_input == "1":
         if main_character.bloodglut < 20:
@@ -109,7 +109,7 @@ while True:
         elif main_character.bloodglut >= 20:
             options(cell_prompt_list_1_2)
             user_input_1_2 = input(">>>")
-            while user_input == "1":
+            while user_input_1_2 == "1":
                 if main_character.inv.has_item("Bone Key"):
                     print("You've already done this.")
                     break
@@ -126,31 +126,28 @@ while True:
                     print("HINT: Type 'Write' into the terminal to carve text into your arm.")
                     main_character.inv.add_item("Bone Pen")
                     break
-            while user_input_1_2 == "3":
+            if user_input_1_2 == "3":
                 print("You go back.")
                 break
 
     while user_input == "2":
         print("You check the basin. The blood is as much mud as it is blood. You revolt.")
         options(cell_prompt_list_2_1)
-        user_input = input(">>>")
-        while user_input == "1":
+        user_input_2_1 = input(">>>")
+        while user_input_2_1 == "1":
             if main_character.bloodglut >= 20:
                 print("You've already done this.")
                 break
             else:
                 main_character.add_blood_glut(20)
                 break
-        while user_input == "2":
+        while user_input_2_1 == "2":
             print("You kneel down and look under the sink to see someone has engraved some text.")
             print("'Something always yearns. Don't ever accept this hell.'")
             break
-        while user_input == "3":
+        if user_input_2_1  == "3":
             break
-
-
-
-
+        
     while user_input == "3":
         print("'Help me', calls one prisoner. 'Please', calls another. They're Dracula's play things. Nothing to him but chaffe. Your will cements. You must escape.")
         break
@@ -162,9 +159,11 @@ while True:
     
     while user_input == "5":
         if main_character.inv.has_item("Bone Key"):
-            print("You jam the bone key into the cell door keyhole, breaking it but snapping the lock open at the same time. The door slides wide open.")
+            print("You jam the bone key into the cell door keyhole, breaking it but snapping the lock open at the same time. The door slides wide open and you step through into a hallway.")
+            print("The prisoners moan and wail at you to let them out. To the left of you is a door labelled 'Treasury'. To your right, one names 'Armoury'. Before you is a wide door that appears to lead outside.")
             main_character.inv.remove_item("Bone Key")
             remove_last_option(cell_prompt_list_1_1, "Exit the cell door.")
+            break
         else:
             print("It's not particularly well built. If only we had some way to open it...")
             break
