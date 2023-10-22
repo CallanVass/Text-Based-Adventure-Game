@@ -1,6 +1,12 @@
 import time
 import random
 
+def options(option_list, room):
+    room.get_name()
+    for index, option in enumerate(option_list):
+        print(f"Option {index + 1}: {option}")
+    return
+
 
 
 class Character:
@@ -66,7 +72,6 @@ class Notebook:
 class Chance:
     def chance_of_success(self, percentage):
         random_nums = [random.randint(1, 10) for _ in range(percentage)]
-        print(random_nums)
         if percentage == 1:
             if 1 in random_nums:
                 print("Your attempt fails!")
@@ -82,7 +87,7 @@ class Chance:
                 print("Your attempt fails!")
             else:
                 print("Your attempt succeeds!")
-        if percentage == 4:
+        if percentage >= 4:
             print("Callan, you dolt, that's a stupidly high percentage. Change it right now.")
 
 class Options:
@@ -95,19 +100,36 @@ class Room:
     
     def get_name(self):
         print(f"You are currently in the {self.name}.")
+#NEEDED FOR FIGHT FUNCTION
+cell = Room("Cell", [])
+jail = Room("Jail", [""])
+treasury = Room("Treasury", ["Gold key"])
+tunnel = Room("Tunnel", [""])
+armoury = Room("Armoury", ["Sword"])
+master_chambers = Room("Master Chambers", ["Master Key"])
+prompt = "What do you want to do?"
 
-class Fight:
-    def quick_time_event(self, character, time_limit, health_lost):
-        start = time.time()
-        user_input = input("Quickly press Enter to fight back!")
-        end = time.time()
-        time_passed = end - start
+#POTENTIALL DELETE IF WORKING ON MAIN
+# class Fight:
+#     def quick_time_event(self, character, time_limit, health_lost, room):
+#         start = time.time()
+#         quick_user_input = input("Quickly press Enter to fight back!")
+#         end = time.time()
+#         time_passed = end - start
 
-        if user_input == "" and time_passed < time_limit:
-            print("You kill them")
-        else:
-            character.lose_health(health_lost)
-            print(f"You lose {health_lost} health!")
+#         quick_time_prompt_list = ["Drain them dry!",
+#                                   "Knock them unconscious!"]
+
+#         while quick_user_input == "" and time_passed < time_limit:
+#             print("What would you like to do?")
+#             options(quick_time_prompt_list, room)
+#             quick_user_input_1 = input(">>> ")
+#             while quick_user_input_1 == "1":
+#                 main_character.bloodglut
+#             print("You kill them")
+#         else:
+#             character.lose_health(health_lost)
+#             print(f"You lose {health_lost} health!")
 
 
 
