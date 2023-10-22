@@ -10,7 +10,8 @@ prisoners_free = False
 servant_killed = False
 servant_unconscious = False
 tresury_entered = False
-dig_counter = 0
+tunnel_door_opened = False
+dig_counter = 1
 
 # main_character.check_stats()
 notebook = Notebook()
@@ -63,34 +64,36 @@ def chance_of_success(percentage):
             print("Callan, you turd, that's a stupidly high percentage. Change it right now.")
 
 def quick_time_event(character, time_limit, health_lost, room):
-        start = time.time()
-        quick_user_input = input("Quickly press Enter to fight back!")
-        end = time.time()
-        time_passed = end - start
-
+        enemy_killed = False
         quick_time_prompt_list = ["Drain them dry!",
                                   "Knock them unconscious!"]
-
-        if quick_user_input == "" and time_passed < time_limit:
-            dig_counter =+ 1
-            print("What would you like to do?")
-            options(quick_time_prompt_list, room)
-            quick_user_input_1 = input(">>> ")
+        while enemy_killed == False:
+            start = time.time()
+            quick_user_input = input("Quickly press Enter to fight back!")
+            end = time.time()
+            time_passed = end - start
+            if quick_user_input == "" and time_passed < time_limit:
+                print("What would you like to do?")
+                options(quick_time_prompt_list, room)
+                quick_user_input_1 = input(">>> ")
             while quick_user_input_1 == "1":
-                main_character.add_blood_glut(10)
                 print("You feed, throwing the body aside like a wet blanket when you're done!")
+                main_character.add_blood_glut(10)
+                enemy_killed = True
                 break
             while quick_user_input_1 == "2":
                 print("You throw the body aside, refusing to indulge in your dark desires!")
+                enemy_killed = True
                 break
-        else:
-            character.lose_health(health_lost)
-            print(f"You lose {health_lost} health!")
+            if quick_user_input == "" and time_passed > time_limit:
+                character.lose_health(health_lost)
+                print(f"You lose {health_lost} health!")
 
 
 #FOUND BY 1 GUARD FUNCTION
 def found_by_one_guard():
     print("A guard stumbles into the room, sword half unsheathed, drawn in by the tinkling of coins.")
+    time.sleep(3)
     quick_time_event(main_character, 2, 30, treasury)
 
 def main_door_full_blood_glut_ending():
@@ -160,7 +163,11 @@ treasury_prompt_list_1_2 = ["Bite the coin.",
                              "Forge a key out of the gold coins.",
                              "Go back.",]
 #Examining the door at the back of the room
-treasury_prompt_list_1_3 = ["Dig away some of the coins. (* 10 percent chance of being heard *)",
+treasury_prompt_list_1_3 = ["Dig away some of the coins. (* 20%% chance of being heard *)",
+                             "Check the letter on the table besides the door.",
+                             "Go back."]
+
+treasury_prompt_list_1_3_1 = ["Step over the gold and enter the door.",
                              "Check the letter on the table besides the door.",
                              "Go back."]
 #Opening the door in the treasury
@@ -183,6 +190,9 @@ while True:
             append_arm()
         else:
             pass
+    if main_character.health <= 0:
+        #GAME OVER DUE TO MISSING HEALTH FUNCTION GOES HERE
+        pass
     while user_input == "1":
         if main_character.bloodglut < 20:
             print("You walk over to the pile of bones.")
@@ -303,10 +313,13 @@ while True:
                     if treasury_room_user_input_1 == "3":
                         break
                 while treasury_room_user_input == "3":
-                    if servant_unconscious == False:
+                    if servant_unconscious == False and servant_killed == False:
                         print("With a hard backhand, you clop the servant over the head. He falls to the ground,")
                         print("moaning for a moment before going still. His wheezing breaths fill the chamber. How annoying.")
                         servant_unconscious = True
+                        break
+                    elif servant_killed == True:
+                        print("You've just killed the man. Doesn't get much more 'unconscious' than that, does it?")
                         break
                     else:
                         print("He's already unconscious. Give the man a break.")
@@ -317,33 +330,36 @@ while True:
                     else:
                         print("You approach the door, which is mostly-obscured by piles of coins.")
                         display_stats()
-                        options(treasury_prompt_list_1_3, treasury)
+                        if tunnel_door_opened:
+                            options(treasury_prompt_list_1_3_1, treasury)
+                        else: 
+                            options(treasury_prompt_list_1_3, treasury)
                         treasury_room_user_input_2 = input(">>> ")
                         while treasury_room_user_input_2 == "1":
                             if dig_counter == 3:
+                                tunnel_door_opened = True
                                 print("You stand before a dark tunnel with a yellow glowing light at the end of it.")
                                 display_stats()
-                                options(treasury_prompt_list_1_4, treasury)
+                                options(treasury_prompt_list_1_4, tunnel)
                                 treasury_room_user_input_3 = input(">>> ")
                                 while treasury_room_user_input_3 == "1":
                                     break
                                 if treasury_room_user_input_3 == "2":
                                     break
-                                #Figure out the backwards and forwards features of the tunnels
                             chance_of_success(1)
-                            if chance_of_success(1) == "Your attempt fails!":
+                            if chance_of_success(2) == "Your attempt fails!":
+                                dig_counter += 1
                                 found_by_one_guard()
                             else:
                                 print("You dig successfully without being heard!")
                                 dig_counter += 1
                             break
-                        while treasury_room_user_input_2 == "2":
-                            print("It reads: 'No bloodbag is to enter the this room until I've dealt with it's occupant.")
+                        if treasury_room_user_input_2 == "2":
+                            print("It reads: 'No bloodbag is to enter here until I've dealt with it's occupant.'")
                             print("Signed: Dracula")
                         #Ensure this if can be an if and doesn't need to be a while
                         if treasury_room_user_input_2 == "3":
                             break
-                    break
                 if treasury_room_user_input == "5":
                     break
             while cell_room_user_input == "2":
