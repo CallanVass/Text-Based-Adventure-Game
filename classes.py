@@ -18,6 +18,8 @@ class Character:
     def add_blood_glut(self, amount):
         self.bloodglut = self.bloodglut + amount
         increase = f"Blood Glut has been increased by {amount}!"
+        if self.bloodglut > 100:
+            self.bloodglut = 100
         if self.bloodglut <= 20:
             print(f"{increase} Dark desires writhe within you!")
         elif self.bloodglut > 20 and self.bloodglut <= 50:
@@ -60,6 +62,10 @@ class Notebook:
         with open("notebook.txt", "a") as file:
             user_input = input("What would you like to carve? ")
             file.write(f"{user_input}\n")
+    
+    def reset_notebook(self):
+        with open("notebook.txt", "w") as file:
+            pass
 
 class Chance:
     def chance_of_success(self, percentage):

@@ -3,9 +3,6 @@ import time
 import random
 import subprocess
 
-#QUICKTIME EVENT WORKING
-# fight = Fight()
-
 cell_door_open = False
 prisoners_free = False
 servant_killed = False
@@ -20,7 +17,8 @@ bowed_before_ominous_spirit = False
 tunnel_prompt_list_1_asked = False
 main_character_is_vampire = False
 treasury_guard_dead = False
-
+armoury_guards_dead = False
+armoury_entered = False
 
 # main_character.check_stats()
 notebook = Notebook()
@@ -78,7 +76,7 @@ def quick_time_event(character, time_limit, health_lost, room):
                                   "Knock them unconscious!"]
         while enemy_killed == False:
             start = time.time()
-            quick_user_input = input("Quickly press Enter to fight back!")
+            quick_user_input = input(f"Quickly press Enter to fight back: ")
             end = time.time()
             time_passed = end - start
             if quick_user_input == "" and time_passed < time_limit:
@@ -86,7 +84,7 @@ def quick_time_event(character, time_limit, health_lost, room):
                 options(quick_time_prompt_list, room)
                 quick_user_input_1 = input(">>> ")
                 while quick_user_input_1 == "1":
-                    print("You feed, throwing the body aside like a wet blanket when you're done!")
+                    print("You feed, throwing the body aside like a wet blanket!")
                     main_character.add_blood_glut(10)
                     enemy_killed = True
                     break
@@ -101,10 +99,9 @@ def quick_time_event(character, time_limit, health_lost, room):
 
 
 #FOUND BY 1 GUARD FUNCTION
-def found_by_one_guard():
-    print("A guard stumbles into the room, sword half unsheathed, drawn in by the tinkling of coins.")
+def attacked_by_one_guard(time_limit_for_sequence, room):
     time.sleep(2.5)
-    quick_time_event(main_character, 2, 30, treasury)
+    quick_time_event(main_character, time_limit_for_sequence, 30, room)
 
 def restart_program():
     subprocess.run(["python", "main.py"])
@@ -125,10 +122,11 @@ def ominous_spirit_stare_ending():
         print("'Oh, for fucks sake!' the spirit rages. 'How can one little human be so annoying?!'")
         print("'Fine, go through. See if I care. Just stop staring at me. Please.'")
         print("The spirit moves aside and you rush past, afraid he'll rescind his offer.")
-        print("Soon you come to the end of the drain. The air smells fresh. Like pines and clear sky.")
+        print("Soon you come to the end of the tunnel. The air smells fresh. Like pines and clear sky.")
         print("You take one final look back. Misery. A bad dream, and nothing more.")
         print("You're free.")
         #CREDITS GO HERE
+        notebook.reset_notebook()
         ask_if_play_again()
     else:
         print("'Oh, for fucks sake!' the spirit rages. 'How can one little human be so annoying?!'")
@@ -136,10 +134,11 @@ def ominous_spirit_stare_ending():
         print("'Wait one second' you say, risking the wrath of the Ominous Spirit. You sprint back ")
         print("to the Jail and grab the prisoners, hauling them back with you to the tunnel. You ")
         print("keep your head down as you pass the Ominous Spirit. Soon you come to the end of the ")
-        print("drain. The air smells fresh. Like pines and clear sky. You take one final look back.")
+        print("tunnel. The air smells fresh. Like pines and clear sky. You take one final look back.")
         print("Misery. A bad dream, and nothing more. You're free. And what's more, the prisoners are, too.")
         print("Your heart unclenches.")
         #CREDITS GO HERE
+        notebook.reset_notebook()
         ask_if_play_again()
         
 
@@ -150,10 +149,11 @@ def ominous_spirit_riddle_ending():
     main_character.inv.add_item("Spirit's Blessing")
     print("You feel a rush wash over you, and your bloodlust fades. You look to the spirit, but he simply moves aside. ")
     print("You keep your head down as you pass the Ominous Spirit. Soon you come to the end of the ")
-    print("drain. The air smells fresh. Like pines and clear sky. You take one final look back.")
+    print("tunnel. The air smells fresh. Like pines and clear sky. You take one final look back.")
     print("Misery. A bad dream, and nothing more. You're free.")
     print("Your heart unclenches, and you move onwards, propelled by the Ominous Spirit's blessing.")
     #CREDITS GO HERE
+    notebook.reset_notebook()
     ask_if_play_again()
 
 
@@ -164,6 +164,7 @@ def main_door_full_blood_glut_ending():
     print("Your skin boils in the sunlight as the slaves run past you, fear-struck by your smoking form. You have become everything you hate.")
     print("The last thing you remember the unbearably hot sun beating down, melting your flesh...")
     #ASCII ART GOES HERE "THE END"
+    notebook.reset_notebook()
     ask_if_play_again()
 
 
@@ -188,7 +189,7 @@ jail = Room("Jail", [""])
 treasury = Room("Treasury", ["Gold key"])
 tunnel = Room("Tunnel", [""])
 armoury = Room("Armoury", ["Sword"])
-master_chambers = Room("Master Chambers", ["Master Key"])
+dracula_chambers = Room("Dracula's Chambers", ["Master Key"])
 prompt = "What do you want to do?"
 end = Room("End", [])
 
@@ -211,7 +212,7 @@ cell_prompt_list_2_1 = ["Take a sip",
 
 cell_room_prompt_list_1_1 = ["Enter Treasury Room.",
                              "Free the prisoners.",
-                             "Enter Armoury.",
+                             "Enter Armoury. (* 100% chance of conflict *)",
                              "Try the door to freedom",
                              "Check engraving on the door.",
                              "Go back into the Cell"]
@@ -226,7 +227,7 @@ treasury_prompt_list_1_2 = ["Bite the coin.",
                              "Forge a key out of the gold coins.",
                              "Go back.",]
 #Examining the door at the back of the room
-treasury_prompt_list_1_3 = ["Dig away some of the coins. (* 20% chance of being heard *)",
+treasury_prompt_list_1_3 = ["Dig away some of the coins. (* 20% chance of conflict *)",
                              "Check the letter on the table besides the door.",
                              "Go back."]
 
@@ -245,6 +246,20 @@ tunnel_prompt_list_2_1 = ["Bow before the figure.",
                         "Try the riddle.",
                         "Stand and stare in awkward silence.",
                         "Go back."]
+
+armoury_prompt_list_1 = ["Charge the men head on."]
+
+armoury_prompt_list_2 = ["Back into the doorway to draw them in one at a time.",
+                         "Charge them head on."]
+
+armoury_prompt_list_3 = ["Go forward to Dracula's Chambers.",
+                         "Loot the soldier's bodies."
+                         "Go back."]
+
+dracula_prompt_list_1 = ["'You deserve to die for what you've done to these people.'",
+                         "'You've lived for long enough, don't you think?'",
+                         "'Actually, I've left a pile of bodies behind me the whole way here. I have zero moral agency.'"
+                         "Go back."]
 
 
 end_prompt_list = ["Yes",
@@ -367,6 +382,12 @@ while True:
                         main_character.add_blood_glut(30)
                         servant_killed = True
                         break
+                    elif servant_unconscious == True:
+                        print("A change of heart, eh?")
+                        print("You pick the man up off the floor and tear into his neck. With nobody to stop you,")
+                        print("you're able to drink your fill.")
+                        main_character.add_blood_glut(30)
+                        servant_killed = True
                     else:
                         print("He can't get any dead-er than he is.")
                         break
@@ -463,16 +484,12 @@ while True:
                                             print("To me, a sharpened pencil is closer than an unsharpened one.")
                                             print("I was before, and I will be again.")
                                             print("What am I?'")
-                                            
-
-                                        
                                         tunnel_user_input_3 = input(">>> ")
                                         if tunnel_user_input_3 == "Death" or tunnel_user_input_3 == "death":
                                             ominous_spirit_riddle_ending()
                                         else:
                                             print("Ha. Nice try, but you'll have to try harder.")
                                             break
-
                                     while tunnel_user_input_2 == "3":
                                         if ominous_spirit_stare_counter > 19:
                                             ominous_spirit_stare_ending()
@@ -498,11 +515,12 @@ while True:
                                         break
                                 if treasury_room_user_input_3 == "2":
                                     break
-                            chance_of_success(2)
+                            chance_of_success(3)
                             if tunnel_door_opened == False:
-                                if chance_of_success(2) == "Your attempt fails!":
+                                if chance_of_success(3) == "Your attempt fails!":
                                     dig_counter += 1
-                                    found_by_one_guard()
+                                    print("A guard stumbles into the room, sword half unsheathed, drawn in by the tinkling of coins.")
+                                    attacked_by_one_guard(2.5, treasury)
                                     treasury_guard_dead = True
                                 else:
                                     print("You dig successfully without being heard!")
@@ -513,7 +531,6 @@ while True:
                         if treasury_room_user_input_2 == "2":
                             print("It reads: 'No bloodbag is to enter here until I've dealt with it's occupant.'")
                             print("Signed: Dracula")
-                        #Ensure this if can be an if and doesn't need to be a while
                         if treasury_room_user_input_2 == "3":
                             break
                 if treasury_room_user_input == "5":
@@ -540,8 +557,77 @@ while True:
                     break
             while cell_room_user_input == "3":
                 if main_character.inv.has_item("Gold Key"):
-                    print("You open the Armoury door to find 3 guards, all with plate armour and weapons. They drop their drinks and draw their swords.")
-                    #ARMOURY LOGIC GOES HERE
+                    if armoury_entered == False:
+                        print("You open the Armoury door to find 3 guards, all with plate armour and weapons. They drop their drinks and draw their swords.")
+                        armoury_entered = True
+                        display_stats()
+                        options(armoury_prompt_list_1, armoury)
+                        armoury_user_input_1 = input(">>> ")
+                        while armoury_prompt_list_1 == "1":
+                            print("You lunge at the closest one, who raises his sword in defense. You dodge.")
+                            time.sleep(2)
+                            attacked_by_one_guard(2.0, armoury)
+                            print("Done with the first one, the other two charge you.")
+                            display_stats()
+                            options(armoury_prompt_list_2, armoury)
+                            armoury_user_input_2 = input(">>> ")
+                            if armoury_user_input_2 == "1":
+                                print("You edge backwards, forcing them to face you one at a time.")
+                                time.sleep(2)
+                                attacked_by_one_guard(2.0, armoury)
+                                display_stats()
+                                print("Done with the first, the other looks hesitant to approach you. You take the fight to him.")
+                                time.sleep(2)
+                                attacked_by_one_guard(2.0, armoury)
+                                display_stats()
+                                break
+                            elif armoury_user_input_2 == "2":
+                                print("Blindly, you rush both of them and get attacked twice in a short period.")
+                                time.sleep(1.5)
+                                attacked_by_one_guard(1.5, armoury)
+                                display_stats()
+                                time.sleep(1)
+                                attacked_by_one_guard(1, armoury)
+                                display_stats()
+                                break
+
+                    else:
+                        print("You stand in the armoury, surveying the carnage you've caused.")
+                        display_stats()
+                        options(armoury_prompt_list_3, armoury)
+                        armoury_user_input_3 = input(">>> ")
+                        while armoury_user_input_3 == "1":
+                            print("With a looming silence, you press forwards, inching the doors to Dracula's chamber open.")
+                            print("It's daytime, so you expect a sleeping figure hanging from the ceiling. You've never")
+                            print("been more incorrect.")
+                            print("Resting on a velvet throne is Dracula in a full set of engraved metal armour. In those")
+                            print("carvings you see a million deaths. A million lifetimes spent drinking blood. Dracula smiles,")
+                            print("her spectacularly white teeth sparkling between her frame of golden hair. She stands from her")
+                            print("throne, a devious smile spread upon her lips.")
+                            print("'I can only presume you're here to kill me,' she says, her smirk growing wider.")
+                            display_stats()
+                            options(dracula_prompt_list_1, dracula_chambers)
+                            dracula_chambers_user_input_3 = input(">>> ")
+                            if dracula_chambers_user_input_3 == "1":
+                                pass
+                            if dracula_chambers_user_input_3 == "2":
+                                pass
+                            if dracula_chambers_user_input_3 == "3":
+                                pass
+                            if dracula_chambers_user_input_3 == "4":
+                                pass
+
+
+                        if armoury_user_input_3 == "2":
+                            print("With thoughts of facing Dracula armed, you reach for their weapons and armour,")
+                            print("only to find they're made of silver and hot to the touch.")
+                            main_character.lose_health(5)
+                            print("'Curse this affliction,' you murmur.")
+                        if armoury_user_input_1 == "3":
+                            break
+
+
+
                 else:
                     print("It appears you need some sort of metal key to do that. Maybe you can make one?")
                     break
