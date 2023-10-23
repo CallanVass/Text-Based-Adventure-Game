@@ -12,6 +12,10 @@ servant_unconscious = False
 tresury_entered = False
 tunnel_door_opened = False
 dig_counter = 1
+tunnel_travelled_down = False
+ominous_spirit_stare_counter = 0
+bowed_before_ominous_spirit = False
+main_character_is_vampire = False
 
 # main_character.check_stats()
 notebook = Notebook()
@@ -76,15 +80,15 @@ def quick_time_event(character, time_limit, health_lost, room):
                 print("What would you like to do?")
                 options(quick_time_prompt_list, room)
                 quick_user_input_1 = input(">>> ")
-            while quick_user_input_1 == "1":
-                print("You feed, throwing the body aside like a wet blanket when you're done!")
-                main_character.add_blood_glut(10)
-                enemy_killed = True
-                break
-            while quick_user_input_1 == "2":
-                print("You throw the body aside, refusing to indulge in your dark desires!")
-                enemy_killed = True
-                break
+                while quick_user_input_1 == "1":
+                    print("You feed, throwing the body aside like a wet blanket when you're done!")
+                    main_character.add_blood_glut(10)
+                    enemy_killed = True
+                    break
+                while quick_user_input_1 == "2":
+                    print("You throw the body aside, refusing to indulge in your dark desires!")
+                    enemy_killed = True
+                    break
             if quick_user_input == "" and time_passed > time_limit:
                 character.lose_health(health_lost)
                 print(f"You lose {health_lost} health!")
@@ -95,6 +99,25 @@ def found_by_one_guard():
     print("A guard stumbles into the room, sword half unsheathed, drawn in by the tinkling of coins.")
     time.sleep(3)
     quick_time_event(main_character, 2, 30, treasury)
+
+def ominous_spirit_stare_ending():
+    if prisoners_free == False:
+        print("'Oh, for fucks sake!' the spirit rages. 'How can one little human be so annoying?!'")
+        print("'Fine, go through. See if I care. Just stop staring at me. Please.'")
+        print("The spirit moves aside and you rush past, afraid he'll rescind his offer.")
+        print("Soon you come to the end of the drain. The air smells fresh. Like pines and clear sky.")
+        print("You take one final look back. Misery. A bad dream, and nothing more.")
+        print("You're free.")
+    else:
+        print("'Oh, for fucks sake!' the spirit rages. 'How can one little human be so annoying?!'")
+        print("'Fine, go through. See if I care. Just stop staring at me. Please.'")
+        print("'Wait one second' you say, risking the wrath of the Ominous Spirit. You sprint back ")
+        print("to the Jail and grab the prisoners, hauling them back with you to the tunnel. You ")
+        print("keep your head down as you pass the Ominous Spirit. Soon you come to the end of the ")
+        print("drain. The air smells fresh. Like pines and clear sky. You take one final look back.")
+        print("Misery. A bad dream, and nothing more. You're free. And what's more, the prisoners are, too.")
+        print("Your heart unclenches.")
+
 
 def main_door_full_blood_glut_ending():
     print("You look back at the wretched place that contained you for so long, wondering if setting it ablaze would be too much.")
@@ -163,7 +186,7 @@ treasury_prompt_list_1_2 = ["Bite the coin.",
                              "Forge a key out of the gold coins.",
                              "Go back.",]
 #Examining the door at the back of the room
-treasury_prompt_list_1_3 = ["Dig away some of the coins. (* 20%% chance of being heard *)",
+treasury_prompt_list_1_3 = ["Dig away some of the coins. (* 20% chance of being heard *)",
                              "Check the letter on the table besides the door.",
                              "Go back."]
 
@@ -171,8 +194,12 @@ treasury_prompt_list_1_3_1 = ["Step over the gold and enter the door.",
                              "Check the letter on the table besides the door.",
                              "Go back."]
 #Opening the door in the treasury
-treasury_prompt_list_1_4 = ["Venture down the tunnel.",
+tunnel_prompt_list_1 = ["Venture down the tunnel.",
                              "Go back."]
+tunnel_prompt_list_2 = ["Bow before the figure.",
+                        "Ask to pass.",
+                        "Stand and stare in awkward silence.",
+                        "Go back."]
 
 
 
@@ -191,7 +218,7 @@ while True:
         else:
             pass
     if main_character.health <= 0:
-        #GAME OVER DUE TO MISSING HEALTH FUNCTION GOES HERE
+        #GAME OVER DUE TO MISSING HEALTH FUNCTION GOES HERE (This only needs to be attached to instances of health loss)
         pass
     while user_input == "1":
         if main_character.bloodglut < 20:
@@ -327,6 +354,7 @@ while True:
                 while treasury_room_user_input == "4":
                     if servant_unconscious == False and servant_killed == False:
                         print("You can't do that yet, you'll be heard!")
+                        break
                     else:
                         print("You approach the door, which is mostly-obscured by piles of coins.")
                         display_stats()
@@ -336,18 +364,53 @@ while True:
                             options(treasury_prompt_list_1_3, treasury)
                         treasury_room_user_input_2 = input(">>> ")
                         while treasury_room_user_input_2 == "1":
-                            if dig_counter == 3:
+                            if dig_counter >= 3:
                                 tunnel_door_opened = True
                                 print("You stand before a dark tunnel with a yellow glowing light at the end of it.")
                                 display_stats()
-                                options(treasury_prompt_list_1_4, tunnel)
+                                options(tunnel_prompt_list_1, tunnel)
                                 treasury_room_user_input_3 = input(">>> ")
                                 while treasury_room_user_input_3 == "1":
-                                    break
+                                    if tunnel_travelled_down == False:
+                                        print("You venture down the tunnel, closing the distance between you and the yellow light.")
+                                        print("As you near, you realise it's not a light, but two lights. You go to turn back, but ")
+                                        print("a voice calls to you, telling you to come closer. You take the chance, and soon find ")
+                                        print("yourself standing before a shadowy figure with two monstrous eyes. The figure hovers ")
+                                        print("before a tunnel.")
+                                        tunnel_travelled_down = True
+                                    else:
+                                        print("'You're back,' says the Ominous Spirit. 'How predictable.'")
+                                    display_stats()
+                                    options(tunnel_prompt_list_2, tunnel)
+                                    tunnel_user_input_2 = input(">>> ")
+                                    while tunnel_user_input_2 == "1":
+                                        if bowed_before_ominous_spirit == False:
+                                            print("'What is this? Get up. Bow again and rip you to shreds,' he says.")
+                                            print("How pleasnt.")
+                                        else:
+                                            
+                                    while tunnel_user_input_2 == "2":
+                                        break
+                                    if tunnel_user_input_2 == "3":
+                                        if ominous_spirit_stare_counter > 19:
+                                            ominous_spirit_stare_ending()
+                                        elif ominous_spirit_stare_counter < 5:
+                                            print("The Ominous Spirit stares straight back at you, piercing your very soul. Something ")
+                                            print("inside you goes cold. You shiver.")
+                                            ominous_spirit_stare_counter += 1
+                                        elif ominous_spirit_stare_counter >= 10:
+                                            print("'What?' the Ominous Spirit asks. 'Why are you staring?'")
+                                            print("You smile.")
+                                            ominous_spirit_stare_counter += 1
+                                        elif ominous_spirit_stare_counter >= 15:
+                                            print("The Spirit appears to be losing his composition. You keep smiling")
+                                            ominous_spirit_stare_counter += 1  
+                                    while tunnel_prompt_list_2 == "4":
+                                        break
                                 if treasury_room_user_input_3 == "2":
                                     break
                             chance_of_success(1)
-                            if chance_of_success(2) == "Your attempt fails!":
+                            if chance_of_success(3) == "Your attempt fails!":
                                 dig_counter += 1
                                 found_by_one_guard()
                             else:
