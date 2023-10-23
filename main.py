@@ -96,7 +96,6 @@ def quick_time_event(character, time_limit, health_lost, room):
                     break
             if quick_user_input == "" and time_passed > time_limit:
                 character.lose_health(health_lost)
-                print(f"You lose {health_lost} health!")
 
 
 
@@ -109,7 +108,7 @@ def found_by_one_guard():
 
 def restart_program():
     subprocess.run(["python", "main.py"])
-    
+
 def ask_if_play_again():
     print("Would you like to play again?")
     options(end_prompt_list, end)
@@ -147,7 +146,7 @@ def ominous_spirit_stare_ending():
 def ominous_spirit_riddle_ending():
     print("If the spirit had a brow, it would be furrowed. He stands in silence for a moment, as though trying ")
     print("to figure out how you did it. After some time, he snaps out of it and his eyes focus on you. ")
-    print("'You're not like the others... I don't know how, or why, but you're not. And for tha, I give you this: ")
+    print("'You're not like the others... I don't know how, or why, but you're not. And for that, I give you this: ")
     main_character.inv.add_item("Spirit's Blessing")
     print("You feel a rush wash over you, and your bloodlust fades. You look to the spirit, but he simply moves aside. ")
     print("You keep your head down as you pass the Ominous Spirit. Soon you come to the end of the ")
@@ -155,6 +154,7 @@ def ominous_spirit_riddle_ending():
     print("Misery. A bad dream, and nothing more. You're free.")
     print("Your heart unclenches, and you move onwards, propelled by the Ominous Spirit's blessing.")
     #CREDITS GO HERE
+    ask_if_play_again()
 
 
 def main_door_full_blood_glut_ending():
@@ -164,6 +164,7 @@ def main_door_full_blood_glut_ending():
     print("Your skin boils in the sunlight as the slaves run past you, fear-struck by your smoking form. You have become everything you hate.")
     print("The last thing you remember the unbearably hot sun beating down, melting your flesh...")
     #ASCII ART GOES HERE "THE END"
+    ask_if_play_again()
 
 
 #CHANCE OF AN EVENT WORKING
@@ -427,12 +428,16 @@ while True:
                                         print("before a tunnel.")
                                         tunnel_travelled_down = True
                                     display_stats()
-                                    options(tunnel_prompt_list_2, tunnel)
+                                    if asked_riddle == False:
+                                        options(tunnel_prompt_list_2, tunnel)
+                                    else:
+                                        options(tunnel_prompt_list_2_1, tunnel)
                                     tunnel_user_input_2 = input(">>> ")
                                     while tunnel_user_input_2 == "1":
                                         if bowed_before_ominous_spirit == False:
                                             print("'What is this? Get up. Bow again and rip you to shreds,' he says.")
                                             print("How pleasant.")
+                                            bowed_before_ominous_spirit = True
                                             break
                                         else:
                                             print("'What, you thought I was joking?'")
@@ -440,6 +445,9 @@ while True:
                                             main_character.lose_health(40)
                                             break
                                     while tunnel_user_input_2 == "2":
+                                        if main_character.bloodglut <= 50:
+                                            print("Look at you - all gorged on blood. And now you want my help? I don't think so.")
+                                            break
                                         if asked_riddle == False:
                                             print("'Hmm, interesting proposition,' says the Ominous Spirit. 'I'll tell you what - ")
                                             print("if you can answer my riddle, I'll let you go. Here it is: ")
@@ -455,13 +463,15 @@ while True:
                                             print("To me, a sharpened pencil is closer than an unsharpened one.")
                                             print("I was before, and I will be again.")
                                             print("What am I?'")
+                                            
 
-                                        display_stats()
+                                        
                                         tunnel_user_input_3 = input(">>> ")
                                         if tunnel_user_input_3 == "Death" or tunnel_user_input_3 == "death":
                                             ominous_spirit_riddle_ending()
                                         else:
                                             print("Ha. Nice try, but you'll have to try harder.")
+                                            break
 
                                     while tunnel_user_input_2 == "3":
                                         if ominous_spirit_stare_counter > 19:
@@ -488,9 +498,9 @@ while True:
                                         break
                                 if treasury_room_user_input_3 == "2":
                                     break
-                            chance_of_success(1)
+                            chance_of_success(2)
                             if tunnel_door_opened == False:
-                                if chance_of_success(1) == "Your attempt fails!":
+                                if chance_of_success(2) == "Your attempt fails!":
                                     dig_counter += 1
                                     found_by_one_guard()
                                     treasury_guard_dead = True

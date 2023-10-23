@@ -1,14 +1,6 @@
 import time
 import random
 
-def options(option_list, room):
-    room.get_name()
-    for index, option in enumerate(option_list):
-        print(f"Option {index + 1}: {option}")
-    return
-
-
-
 class Character:
     def __init__(self, name):
         self.name = name
@@ -21,7 +13,7 @@ class Character:
 
     def lose_health(self, health_loss):
         self.health -= health_loss
-        return self.health
+        print(f"You lose {health_loss} health!")
 
     def add_blood_glut(self, amount):
         self.bloodglut = self.bloodglut + amount
@@ -90,9 +82,6 @@ class Chance:
         if percentage >= 4:
             print("Callan, you dolt, that's a stupidly high percentage. Change it right now.")
 
-class Options:
-    pass
-
 class Room:
     def __init__(self, name, inv):
         self.inv = Inventory()
@@ -100,37 +89,4 @@ class Room:
     
     def get_name(self):
         print(f"You are currently in the {self.name}.")
-#NEEDED FOR FIGHT FUNCTION
-cell = Room("Cell", [])
-jail = Room("Jail", [""])
-treasury = Room("Treasury", ["Gold key"])
-tunnel = Room("Tunnel", [""])
-armoury = Room("Armoury", ["Sword"])
-master_chambers = Room("Master Chambers", ["Master Key"])
-prompt = "What do you want to do?"
-
-#POTENTIALL DELETE IF WORKING ON MAIN
-# class Fight:
-#     def quick_time_event(self, character, time_limit, health_lost, room):
-#         start = time.time()
-#         quick_user_input = input("Quickly press Enter to fight back!")
-#         end = time.time()
-#         time_passed = end - start
-
-#         quick_time_prompt_list = ["Drain them dry!",
-#                                   "Knock them unconscious!"]
-
-#         while quick_user_input == "" and time_passed < time_limit:
-#             print("What would you like to do?")
-#             options(quick_time_prompt_list, room)
-#             quick_user_input_1 = input(">>> ")
-#             while quick_user_input_1 == "1":
-#                 main_character.bloodglut
-#             print("You kill them")
-#         else:
-#             character.lose_health(health_lost)
-#             print(f"You lose {health_lost} health!")
-
-
-
 
