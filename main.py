@@ -1,6 +1,7 @@
 from classes import *
 import time
 import random
+import subprocess
 
 #QUICKTIME EVENT WORKING
 # fight = Fight()
@@ -13,9 +14,13 @@ tresury_entered = False
 tunnel_door_opened = False
 dig_counter = 1
 tunnel_travelled_down = False
-ominous_spirit_stare_counter = 0
+ominous_spirit_stare_counter = 1
+asked_riddle = False
 bowed_before_ominous_spirit = False
+tunnel_prompt_list_1_asked = False
 main_character_is_vampire = False
+treasury_guard_dead = False
+
 
 # main_character.check_stats()
 notebook = Notebook()
@@ -94,11 +99,27 @@ def quick_time_event(character, time_limit, health_lost, room):
                 print(f"You lose {health_lost} health!")
 
 
+
+
 #FOUND BY 1 GUARD FUNCTION
 def found_by_one_guard():
     print("A guard stumbles into the room, sword half unsheathed, drawn in by the tinkling of coins.")
-    time.sleep(3)
+    time.sleep(2.5)
     quick_time_event(main_character, 2, 30, treasury)
+
+def restart_program():
+    subprocess.run(["python", "main.py"])
+    
+def ask_if_play_again():
+    print("Would you like to play again?")
+    options(end_prompt_list, end)
+    end_user_input = input(">>> ")
+    if end_user_input == "1":
+        restart_program()
+    elif end_user_input == "2":
+        print("Thanks for playing!")
+        time.sleep(1)
+        raise SystemExit
 
 def ominous_spirit_stare_ending():
     if prisoners_free == False:
@@ -108,6 +129,8 @@ def ominous_spirit_stare_ending():
         print("Soon you come to the end of the drain. The air smells fresh. Like pines and clear sky.")
         print("You take one final look back. Misery. A bad dream, and nothing more.")
         print("You're free.")
+        #CREDITS GO HERE
+        ask_if_play_again()
     else:
         print("'Oh, for fucks sake!' the spirit rages. 'How can one little human be so annoying?!'")
         print("'Fine, go through. See if I care. Just stop staring at me. Please.'")
@@ -117,6 +140,21 @@ def ominous_spirit_stare_ending():
         print("drain. The air smells fresh. Like pines and clear sky. You take one final look back.")
         print("Misery. A bad dream, and nothing more. You're free. And what's more, the prisoners are, too.")
         print("Your heart unclenches.")
+        #CREDITS GO HERE
+        ask_if_play_again()
+        
+
+def ominous_spirit_riddle_ending():
+    print("If the spirit had a brow, it would be furrowed. He stands in silence for a moment, as though trying ")
+    print("to figure out how you did it. After some time, he snaps out of it and his eyes focus on you. ")
+    print("'You're not like the others... I don't know how, or why, but you're not. And for tha, I give you this: ")
+    main_character.inv.add_item("Spirit's Blessing")
+    print("You feel a rush wash over you, and your bloodlust fades. You look to the spirit, but he simply moves aside. ")
+    print("You keep your head down as you pass the Ominous Spirit. Soon you come to the end of the ")
+    print("drain. The air smells fresh. Like pines and clear sky. You take one final look back.")
+    print("Misery. A bad dream, and nothing more. You're free.")
+    print("Your heart unclenches, and you move onwards, propelled by the Ominous Spirit's blessing.")
+    #CREDITS GO HERE
 
 
 def main_door_full_blood_glut_ending():
@@ -151,6 +189,7 @@ tunnel = Room("Tunnel", [""])
 armoury = Room("Armoury", ["Sword"])
 master_chambers = Room("Master Chambers", ["Master Key"])
 prompt = "What do you want to do?"
+end = Room("End", [])
 
 
 #CELL LOGIC
@@ -200,6 +239,15 @@ tunnel_prompt_list_2 = ["Bow before the figure.",
                         "Ask to pass.",
                         "Stand and stare in awkward silence.",
                         "Go back."]
+
+tunnel_prompt_list_2_1 = ["Bow before the figure.",
+                        "Try the riddle.",
+                        "Stand and stare in awkward silence.",
+                        "Go back."]
+
+
+end_prompt_list = ["Yes",
+                   "No"]
 
 
 
@@ -378,45 +426,80 @@ while True:
                                         print("yourself standing before a shadowy figure with two monstrous eyes. The figure hovers ")
                                         print("before a tunnel.")
                                         tunnel_travelled_down = True
-                                    else:
-                                        print("'You're back,' says the Ominous Spirit. 'How predictable.'")
                                     display_stats()
                                     options(tunnel_prompt_list_2, tunnel)
                                     tunnel_user_input_2 = input(">>> ")
                                     while tunnel_user_input_2 == "1":
                                         if bowed_before_ominous_spirit == False:
                                             print("'What is this? Get up. Bow again and rip you to shreds,' he says.")
-                                            print("How pleasnt.")
+                                            print("How pleasant.")
+                                            break
                                         else:
-                                            
+                                            print("'What, you thought I was joking?'")
+                                            print("The Ominous Spirit lashes out.")
+                                            main_character.lose_health(40)
+                                            break
                                     while tunnel_user_input_2 == "2":
-                                        break
-                                    if tunnel_user_input_2 == "3":
+                                        if asked_riddle == False:
+                                            print("'Hmm, interesting proposition,' says the Ominous Spirit. 'I'll tell you what - ")
+                                            print("if you can answer my riddle, I'll let you go. Here it is: ")
+                                            print("'I'm the timeless enigma, lurking somwhere between future and past.")
+                                            print("To me, a sharpened pencil is closer than an unsharpened one.")
+                                            print("I was before, and I will be again.")
+                                            print("What am I?'")
+                                            asked_riddle = True
+                                        else:
+                                            print("'Back to make another guess? Come on then, let's hear it.'")
+                                            print("'Here's the riddle again, in case you've forgotten. You probably have:'")
+                                            print("'I'm the timeless enigma, lurking somwhere between future and past.")
+                                            print("To me, a sharpened pencil is closer than an unsharpened one.")
+                                            print("I was before, and I will be again.")
+                                            print("What am I?'")
+
+                                        display_stats()
+                                        tunnel_user_input_3 = input(">>> ")
+                                        if tunnel_user_input_3 == "Death" or tunnel_user_input_3 == "death":
+                                            ominous_spirit_riddle_ending()
+                                        else:
+                                            print("Ha. Nice try, but you'll have to try harder.")
+
+                                    while tunnel_user_input_2 == "3":
                                         if ominous_spirit_stare_counter > 19:
                                             ominous_spirit_stare_ending()
                                         elif ominous_spirit_stare_counter < 5:
                                             print("The Ominous Spirit stares straight back at you, piercing your very soul. Something ")
                                             print("inside you goes cold. You shiver.")
                                             ominous_spirit_stare_counter += 1
-                                        elif ominous_spirit_stare_counter >= 10:
+                                            break
+                                        elif ominous_spirit_stare_counter >= 5 and ominous_spirit_stare_counter < 10:
                                             print("'What?' the Ominous Spirit asks. 'Why are you staring?'")
                                             print("You smile.")
                                             ominous_spirit_stare_counter += 1
-                                        elif ominous_spirit_stare_counter >= 15:
-                                            print("The Spirit appears to be losing his composition. You keep smiling")
+                                            break
+                                        elif ominous_spirit_stare_counter >= 10 and ominous_spirit_stare_counter < 15:
+                                            print("The Spirit appears to be losing his composition. You keep smiling.")
                                             ominous_spirit_stare_counter += 1  
-                                    while tunnel_prompt_list_2 == "4":
+                                            break
+                                        elif ominous_spirit_stare_counter >= 15 and ominous_spirit_stare_counter <= 19:
+                                            print("He begins to sweat. Your smile widens.")
+                                            ominous_spirit_stare_counter += 1 
+                                            break
+                                    if tunnel_user_input_2 == "4":
                                         break
                                 if treasury_room_user_input_3 == "2":
                                     break
                             chance_of_success(1)
-                            if chance_of_success(3) == "Your attempt fails!":
-                                dig_counter += 1
-                                found_by_one_guard()
+                            if tunnel_door_opened == False:
+                                if chance_of_success(1) == "Your attempt fails!":
+                                    dig_counter += 1
+                                    found_by_one_guard()
+                                    treasury_guard_dead = True
+                                else:
+                                    print("You dig successfully without being heard!")
+                                    dig_counter += 1
+                                break
                             else:
-                                print("You dig successfully without being heard!")
-                                dig_counter += 1
-                            break
+                                break
                         if treasury_room_user_input_2 == "2":
                             print("It reads: 'No bloodbag is to enter here until I've dealt with it's occupant.'")
                             print("Signed: Dracula")
