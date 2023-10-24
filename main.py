@@ -83,7 +83,7 @@ def quick_time_event(character, time_limit, health_lost, room):
                                   "Knock them unconscious!"]
         while enemy_killed == False:
             start = time.time()
-            quick_user_input = input(f"Quickly press Enter to fight back: ")
+            quick_user_input = input(f"Quickly, press Enter!: ")
             end = time.time()
             time_passed = end - start
             if quick_user_input == "" and time_passed < time_limit:
@@ -731,19 +731,22 @@ while True:
                             else:
                                 options(dracula_prompt_list_2, dracula_chambers)
                             dracula_chambers_user_input_3 = input(">>> ")
-                            if dracula_chambers_user_input_3 == "1":
+                            while dracula_chambers_user_input_3 == "1":
                                 print("'Do I really?' she asks. 'People kill animals all the time. What's the difference?")
                                 print("'People aren't animals, there slaves. They want to live,' you remind her. Much good it will do.")
                                 print("Dracula's eyes take on a light glow. 'I've never seen an animal that wants to die.'")
                                 print("She breaks into a tinkling laugh, rattling the plates of her armour.")
-                            if dracula_chambers_user_input_3 == "2":
+                                break
+                            while dracula_chambers_user_input_3 == "2":
                                 print("'It's never enough. Not really. I suspect you're beginning to realise this seeing")
                                 print("as how you're becoming exactly like me.'")
-                            if dracula_chambers_user_input_3 == "3":
+                                break
+                            while dracula_chambers_user_input_3 == "3":
                                 print("Yes, you do display the high level of corruptness that I've come to ask of my servants.")
                                 print("'I'm not corrupt,' you point out.")
                                 print("Dracula snorts, her small pale nose facing the floor as she giggles. What an odd sound.")
                                 print("She leans in closer and whispers loudly 'We're all corrupt.'")
+                                break
                             while dracula_chambers_user_input_3 == "4":
                                 print("'If you insist...'")
                                 time.sleep(1)
@@ -807,10 +810,9 @@ while True:
                             main_character.lose_health(5)
                             print("'Curse this affliction,' you murmur.")
                             check_character_health()
+                        if armoury_user_input_3 == "3":
                             break
-                        if armoury_user_input_1 == "3":
-                            break
-                        break
+                        # break
                 else:
                     print("It appears you need some sort of metal key to do that. Maybe you can make one?")
                     break
