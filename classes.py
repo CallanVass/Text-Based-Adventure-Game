@@ -1,5 +1,7 @@
 import time
 import random
+from main import ask_if_play_again
+from main import 
 
 class Character:
     def __init__(self, name):
@@ -11,9 +13,21 @@ class Character:
     def check_stats(self):
         return f"Health: {self.health}/100    Blood Glut: {self.bloodglut}/100\nInventory: {self.inv.get_items()}"
 
+    def check_dracula_stats(self):
+        return f"Dracula's Health: {self.health}/100"
+
     def lose_health(self, health_loss):
         self.health -= health_loss
         print(f"You lose {health_loss} health!")
+
+    def dracula_health_loss(self, health_loss):
+        self.health -= health_loss
+        print(f"Dracula loses {health_loss} health!")
+    
+    def check_health(self, health):
+        if self.health <= 0:
+            notebook.reset_notebook()
+            ask_if_play_again()
 
     def add_blood_glut(self, amount):
         self.bloodglut = self.bloodglut + amount
