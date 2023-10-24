@@ -53,11 +53,6 @@ def remove_last_option(prompt_list, new_prompt):
     prompt_list.pop()
     prompt_list.append(new_prompt)
 
-def check_health(character):
-    if character.health == 0:
-        print("YOU LOST ALL YOUR HEALTH.")
-        print("GAME OVER!")
-        ask_if_play_again()
 
 
 
@@ -108,6 +103,7 @@ def quick_time_event(character, time_limit, health_lost, room):
                     break
             if quick_user_input == "" and time_passed > time_limit:
                 character.lose_health(health_lost)
+                check_character_health()
 
 def fight_with_dracula(character, time_limit, health_lost):
     start = time.time()
@@ -124,6 +120,7 @@ def fight_with_dracula(character, time_limit, health_lost):
         if quick_user_input == "" and time_passed > time_limit:
             print("They slash you across the chest, drawing thick blood to the surface.")
             character.lose_health(health_lost)
+            check_character_health()
             break
     while attack_counter == 2:
         if quick_user_input == "" and time_passed < time_limit:
@@ -133,6 +130,7 @@ def fight_with_dracula(character, time_limit, health_lost):
         if quick_user_input == "" and time_passed > time_limit:
             print("The attack slams you into a wall. You bounce back, coughing up blood.")
             character.lose_health(health_lost)
+            check_character_health()
             break
     while attack_counter == 3:
         if quick_user_input == "" and time_passed < time_limit:
@@ -142,6 +140,7 @@ def fight_with_dracula(character, time_limit, health_lost):
         if quick_user_input == "" and time_passed > time_limit:
             print("Her attack circumnavigates your defence, piercing your ribs and puncturing a lung.")
             character.lose_health(health_lost)
+            check_character_health()
             break
     while attack_counter == 4:
         if quick_user_input == "" and time_passed < time_limit:
@@ -151,6 +150,7 @@ def fight_with_dracula(character, time_limit, health_lost):
         if quick_user_input == "" and time_passed > time_limit:
             print("Her hand cracks you in the jaw. You turn back, dazed.")
             character.lose_health(health_lost)
+            check_character_health()
             break
     while attack_counter == 5:
         if quick_user_input == "" and time_passed < time_limit:
@@ -160,11 +160,16 @@ def fight_with_dracula(character, time_limit, health_lost):
         if quick_user_input == "" and time_passed > time_limit:
             print("Her hand cracks you in the jaw. You turn back, dazed.")
             character.lose_health(health_lost)
+            check_character_health()
             break
 
 
 
-
+def check_character_health():
+    if main_character.health <= 0:
+        print("YOU LOST ALL YOUR HEALTH.")
+        print("GAME OVER!")
+        ask_if_play_again()
 
 #FOUND BY 1 GUARD FUNCTION
 def attacked_by_one_guard(time_limit_for_sequence, room):
@@ -279,7 +284,7 @@ jail = Room("Jail", [""])
 treasury = Room("Treasury", ["Gold key"])
 tunnel = Room("Tunnel", [""])
 armoury = Room("Armoury", ["Sword"])
-dracula_chambers = Room("Dracula's Chambers", ["Master Key"])
+dracula_chambers = Room("Final Chambers", ["Master Key"])
 prompt = "What do you want to do?"
 end = Room("End", [])
 
@@ -304,6 +309,13 @@ cell_prompt_list_2_1 = ["Take a sip",
 cell_room_prompt_list_1_1 = ["Enter Treasury Room.",
                              "Free the prisoners.",
                              "Enter Armoury. (* 100% chance of conflict *)",
+                             "Try the door to freedom",
+                             "Check engraving on the door.",
+                             "Go back into the Cell"]
+
+cell_room_prompt_list_1_2 = ["Enter Treasury Room.",
+                             "Free the prisoners.",
+                             "Enter Armoury.",
                              "Try the door to freedom",
                              "Check engraving on the door.",
                              "Go back into the Cell"]
@@ -350,6 +362,7 @@ armoury_prompt_list_3 = ["Go forward to Dracula's Chambers.",
 dracula_prompt_list_1 = ["'You deserve to die for what you've done to these people.'",
                          "'You've lived for long enough, don't you think?'",
                          "'Actually, I've left a pile of bodies behind me the whole way here. I have zero moral agency.'",
+                         "Enough chit chat. Let's fight.",
                          "Go back."]
 
 dracula_prompt_list_2 = ["'You deserve to die for what you've done to these people.'",
@@ -358,7 +371,7 @@ dracula_prompt_list_2 = ["'You deserve to die for what you've done to these peop
                          "Enough chit chat. Let's fight.",
                          "Go back."]
 
-dracula_prompt_list_2 = ["'There is no redemption for you!' (Kill Dracula)",
+dracula_prompt_list_2_1 = ["'There is no redemption for you!' (Kill Dracula)",
                          "I suppose... I suppose that could work. (Spare Dracula)"]
 
 dracula_prompt_list_3 = ["Examine the room.",
@@ -464,7 +477,10 @@ while True:
             break
         while cell_door_open and not exit_cell_room:
             display_stats()
-            options(cell_room_prompt_list_1_1, jail)
+            if armoury_entered == False:
+                options(cell_room_prompt_list_1_1, jail)
+            else:
+                options(cell_room_prompt_list_1_2, jail)
             cell_room_user_input = input(">>> ")
             while cell_room_user_input == "1":
                 if tresury_entered == False:
@@ -568,7 +584,7 @@ while True:
                                             print("'What, you thought I was joking?'")
                                             print("The Ominous Spirit lashes out.")
                                             main_character.lose_health(40)
-                                            check_health(main_character)
+                                            check_character_health()
                                             break
                                     while tunnel_user_input_2 == "2":
                                         if main_character.bloodglut <= 50:
@@ -664,7 +680,6 @@ while True:
                 if main_character.inv.has_item("Gold Key"):
                     if armoury_entered == False:
                         print("You open the Armoury door to find 3 guards, all with plate armour and weapons. They drop their drinks and draw their swords.")
-                        
                         display_stats()
                         options(armoury_prompt_list_1, armoury)
                         armoury_user_input_1 = input(">>> ")
@@ -691,7 +706,6 @@ while True:
                                 print("Blindly, you rush both of them and get attacked twice in a short period.")
                                 time.sleep(1.5)
                                 attacked_by_one_guard(1.5, armoury)
-                                display_stats()
                                 time.sleep(1)
                                 attacked_by_one_guard(1, armoury)
                                 armoury_entered = True
@@ -709,7 +723,7 @@ while True:
                             print("Resting on a velvet throne is Dracula in a full set of engraved metal armour. In those")
                             print("carvings you see a million deaths. A million lifetimes spent drinking blood. Dracula smiles,")
                             print("her spectacularly white teeth sparkling between her frame of golden hair. She stands from her")
-                            print("throne, a devious smile spread upon her lips.")
+                            print("throne and descends a couple steps.")
                             print("'I can only presume you're here to kill me,' she says, her smirk growing wider.")
                             display_stats()
                             if servant_killed == True and guard_killed_counter >= 1:
@@ -724,7 +738,7 @@ while True:
                                 print("She breaks into a tinkling laugh, rattling the plates of her armour.")
                             if dracula_chambers_user_input_3 == "2":
                                 print("'It's never enough. Not really. I suspect you're beginning to realise this seeing")
-                                print("as you're becoming exactly like me.'")
+                                print("as how you're becoming exactly like me.'")
                             if dracula_chambers_user_input_3 == "3":
                                 print("Yes, you do display the high level of corruptness that I've come to ask of my servants.")
                                 print("'I'm not corrupt,' you point out.")
@@ -770,7 +784,7 @@ while True:
                                 print("You stand in the armoury, surveying the carnage you've caused.")
                                 dracula.check_dracula_stats()
                                 display_stats()
-                                options(dracula_prompt_list_2, dracula_chambers)
+                                options(dracula_prompt_list_2_1, dracula_chambers)
                                 dracula_chambers_user_input_4 = input(">>> ")
                                 while dracula_chambers_user_input_4 == "1":
                                     dracula_killed = True
@@ -780,31 +794,23 @@ while True:
                                     dracula.check_dracula_stats()
                                     print("Finally... she's dead. You stand up, still shaking from the fight.")
                                     break
-                                    
                                 if dracula_chambers_user_input_4 == "2":
                                     dracula_spared_ending()
-
-                                
-                            
                             if dracula_chambers_user_input_3 == "5":
                                 if dracula_killed == False:
                                     print("There is no going back. One way or another, this ends now.")
                                 else: 
                                     break
-
-
                         if armoury_user_input_3 == "2":
                             print("With thoughts of facing Dracula armed, you reach for their weapons and armour,")
                             print("only to find they're made of silver and hot to the touch.")
                             main_character.lose_health(5)
                             print("'Curse this affliction,' you murmur.")
+                            check_character_health()
                             break
                         if armoury_user_input_1 == "3":
                             break
                         break
-
-
-
                 else:
                     print("It appears you need some sort of metal key to do that. Maybe you can make one?")
                     break
