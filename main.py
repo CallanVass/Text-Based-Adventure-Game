@@ -112,14 +112,14 @@ def fight_with_dracula(character, time_limit, health_lost):
     end = time.time()
     time_passed = end - start
     global attack_counter
+    attack_counter =+ 1
     while attack_counter == 1:
         if quick_user_input == "" and time_passed < time_limit:
             print("You dodge her feral claws and throw back an attack of your own, catching her unaware")
             dracula.dracula_health_loss(20)
-            attack_counter =+ 1
             break
         if quick_user_input == "" and time_passed > time_limit:
-            print("They slash you across the chest, drawing thick blood to the surface.")
+            print("It slashes you across the chest, drawing thick blood to the surface.")
             character.lose_health(health_lost)
             check_character_health()
             break
@@ -127,7 +127,6 @@ def fight_with_dracula(character, time_limit, health_lost):
         if quick_user_input == "" and time_passed < time_limit:
             print("You catch the attack, slashing her across the throat with claws of your own.")
             dracula.dracula_health_loss(20)
-            attack_counter =+ 1
             break
         if quick_user_input == "" and time_passed > time_limit:
             print("The attack slams you into a wall. You bounce back, coughing up blood.")
@@ -138,7 +137,6 @@ def fight_with_dracula(character, time_limit, health_lost):
         if quick_user_input == "" and time_passed < time_limit:
             print("She dives left, but you catch her attack just before it lands, rerouting the momentum.")
             dracula.dracula_health_loss(20)
-            attack_counter =+ 1
             break
         if quick_user_input == "" and time_passed > time_limit:
             print("Her attack circumnavigates your defence, piercing your ribs and puncturing a lung.")
@@ -149,7 +147,6 @@ def fight_with_dracula(character, time_limit, health_lost):
         if quick_user_input == "" and time_passed < time_limit:
             print("You're too quick, and catch her hand just before it smashes into your jaw.")
             dracula.dracula_health_loss(20)
-            attack_counter =+ 1
             break
         if quick_user_input == "" and time_passed > time_limit:
             print("Her hand cracks you in the jaw. You turn back, dazed.")
@@ -160,7 +157,6 @@ def fight_with_dracula(character, time_limit, health_lost):
         if quick_user_input == "" and time_passed < time_limit:
             print("You're too quick, and catch her hand just before it smashes into your jaw.")
             dracula.dracula_health_loss(20)
-            attack_counter =+ 1
             break
         if quick_user_input == "" and time_passed > time_limit:
             print("Her hand cracks you in the jaw. You turn back, dazed.")
@@ -249,8 +245,30 @@ def main_door_full_blood_glut_ending():
     print("You look back at the wretched place that contained you for so long, wondering if setting it ablaze would be too much.")
     print("It's not worth it, you think. There's prey to hunt, and the darkness calls you forward.")
     print("You throw an impossbily-strong kick, ripping the large wooden doors off their hinges and stepping outside.")
-    print("Your skin boils in the sunlight as the slaves run past you, fear-struck by your smoking form. You have become everything you hate.")
-    print("The last thing you remember the unbearably hot sun beating down, melting your flesh...")
+    print("Your skin boils in the sunlight as the prisoners run past you, fear-struck by your smoking form. You have become everything you hate.")
+    print("The last thing you remember is the unbearably hot sun beating down, melting your flesh...")
+    #ASCII ART GOES HERE "THE END"
+    notebook.reset_notebook()
+    ask_if_play_again()
+
+def main_door_ending_with_key():
+    print("You look back at the wretched place that contained you for so long, wondering if setting it ablaze would be too much.")
+    print("It's not worth it, you think. Maybe one day, someone will live here. Someone nice. Someone kind.")
+    print("You insert the Master Key into the lock and swing the large wooden doors forward, stepping outside.")
+    print("Your skin tingles in the sunlight, a ghost of the pain it might have caused you if you'd transitioned.")
+    print("The last thing you remember are the prisoners rushing past you, free at last.")
+    print("You smile. It's finally over.")
+    #ASCII ART GOES HERE "THE END"
+    notebook.reset_notebook()
+    ask_if_play_again()
+
+def main_door_ending_without_key():
+    print("You look back at the wretched place that contained you for so long, wondering if setting it ablaze would be too much.")
+    print("It's not worth it, you think. Maybe one day, someone will live here. Someone nice. Someone kind.")
+    print("You throw an impossbily-strong kick, ripping the large wooden doors off their hinges and stepping outside.")
+    print("Your skin tingles in the sunlight, a ghost of the pain it might have caused you if you'd transitioned.")
+    print("The last thing you remember are the prisoners rushing past you, free at last.")
+    print("You smile. It's finally over.")
     #ASCII ART GOES HERE "THE END"
     notebook.reset_notebook()
     ask_if_play_again()
@@ -379,8 +397,7 @@ dracula_prompt_list_2 = ["'You deserve to die for what you've done to these peop
 dracula_prompt_list_2_1 = ["'There is no redemption for you!' (Kill Dracula)",
                          "I suppose... I suppose that could work. (Spare Dracula)"]
 
-dracula_prompt_list_3 = ["Examine the room.",
-                         "Exit the room."]
+dracula_prompt_list_3 = ["Exit the room."]
 
 
 end_prompt_list = ["Yes",
@@ -665,6 +682,10 @@ while True:
                 if prisoners_free:
                     print("You've already done that.")
                     break
+                elif main_character.inv.has_item("Master Key"):
+                    print("With Dracula's key, you free the prisoners!")
+                    prisoners_free = True
+                    break
                 elif main_character.inv.has_item("Bone Key"):
                     print("You're resourceful, aren't you?")
                     print("You go back and forth, forging bone-shaped keys and smashing them into the locks one by one.")
@@ -690,7 +711,7 @@ while True:
                         armoury_user_input_1 = input(">>> ")
                         while armoury_user_input_1 == "1":
                             print("You lunge at the closest one, who raises his sword in defense. You dodge.")
-                            time.sleep(2)
+                            time.sleep(1.5)
                             attacked_by_one_guard(2.0, armoury)
                             print("Done with the first one, the other two charge you.")
                             display_stats()
@@ -698,11 +719,11 @@ while True:
                             armoury_user_input_2 = input(">>> ")
                             if armoury_user_input_2 == "1":
                                 print("You edge backwards, forcing them to face you one at a time.")
-                                time.sleep(2)
+                                time.sleep(1.6)
                                 attacked_by_one_guard(2.0, armoury)
                                 display_stats()
                                 print("Done with the first, the other looks hesitant to approach you. You take the fight to him.")
-                                time.sleep(2)
+                                time.sleep(1.6)
                                 attacked_by_one_guard(2.0, armoury)
                                 display_stats()
                                 armoury_entered = True
@@ -735,6 +756,11 @@ while True:
                                 dracula_chambers_entered = True
                             else:
                                 display_stats()
+                            if dracula_killed == True:
+                                options(dracula_prompt_list_3, dracula_chambers)
+                                dracula_chambers_user_input_5 = input(">>> ")
+                                if dracula_chambers_user_input_5 == "1":
+                                    break
                             if servant_killed == True and guard_killed_counter >= 1:
                                 options(dracula_prompt_list_1, dracula_chambers)
                             else:
@@ -763,20 +789,20 @@ while True:
                                 time.sleep(1)
                                 print("In a blinding flash, she strikes out with her claws.")
                                 time.sleep(1)
-                                fight_with_dracula(main_character, 1.5, 30)
+                                fight_with_dracula(main_character, 0.8, 35)
                                 dracula.check_dracula_stats()
                                 display_stats()
                                 print("She backs up, eyes glued to you as she circles. 'You think that was quick?' she asks.")
-                                print("Then try this.")
+                                print("'Then try this.'")
                                 print("A blinding attack comes for you.")
                                 time.sleep(1)
-                                fight_with_dracula(main_character, 1, 30)
+                                fight_with_dracula(main_character, 0.5, 35)
                                 dracula.check_dracula_stats()
                                 display_stats()
                                 print("She smiles and a spurt of blood jumps from her throat.")
                                 print("'You're quick. Not quick enough, though.")
                                 time.sleep(2)
-                                fight_with_dracula(main_character, 0.8, 30)
+                                fight_with_dracula(main_character, 0.5, 35)
                                 dracula.check_dracula_stats()
                                 display_stats()
                                 print("As she crashes into her throne, as serious gasp exits her mouth.")
@@ -785,7 +811,7 @@ while True:
                                 print("every direction. ")
                                 print("Like stray lightning, Dracula reaches for you.")
                                 time.sleep(3)
-                                fight_with_dracula(main_character, 0.6, 30)
+                                fight_with_dracula(main_character, 0.3, 35)
                                 dracula.check_dracula_stats()
                                 display_stats()
                                 print("You raise your hand, ready to finish the monster once and for all.")
@@ -798,20 +824,23 @@ while True:
                                 options(dracula_prompt_list_2_1, dracula_chambers)
                                 dracula_chambers_user_input_4 = input(">>> ")
                                 while dracula_chambers_user_input_4 == "1":
-                                    dracula_killed = True
                                     print("'Sorry. Once a monster, always a monster.'")
                                     print("You bring a clawed hand down, severing her head from her shoulders.")
                                     dracula.dracula_health_loss(20)
                                     dracula.check_dracula_stats()
                                     print("Finally... she's dead. You stand up, still shaking from the fight.")
+                                    main_character.inv.add_item("Master Key")
+                                    dracula_killed = True
                                     break
                                 if dracula_chambers_user_input_4 == "2":
                                     dracula_spared_ending()
+                                break
                             if dracula_chambers_user_input_3 == "5":
                                 if dracula_killed == False:
                                     print("There is no going back. One way or another, this ends now.")
                                 else: 
                                     break
+                                break
                         if armoury_user_input_3 == "2":
                             print("With thoughts of facing Dracula armed, you reach for their weapons and armour,")
                             print("only to find they're made of silver and hot to the touch.")
@@ -824,11 +853,15 @@ while True:
                     print("It appears you need some sort of metal key to do that. Maybe you can make one?")
                     break
             while cell_room_user_input == "4":
-                if main_character.bloodglut < 65:
+                if main_character.inv.has_item("Master Key") and main_character.bloodglut <= 65:
+                    main_door_ending_with_key()
+                elif main_character.bloodglut < 65:
                     print("You need either the Master Key or the strength to brute force it.")
                     break
-                elif main_character.bloodglut > 65:
-                        main_door_full_blood_glut_ending()
+                elif main_character.bloodglut > 99:
+                    main_door_full_blood_glut_ending()
+                elif main_character.bloodglut > 65 and main_character.bloodglut < 99:
+                    main_door_ending_without_key()    
             while cell_room_user_input == "5":
                 print("You step closer, reading the quote plainly with your imporved vision.")
                 print("'I'll tear spleens, defeat everything and this hell to get what I want.'")
