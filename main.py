@@ -41,6 +41,7 @@ def options(option_list, room):
     room.get_name()
     for index, option in enumerate(option_list):
         print(f"Option {index + 1}: {option}")
+        time.sleep(0.2)
     return
 
 #DISPLAY CHARACTER STATS
@@ -227,14 +228,16 @@ def ominous_spirit_stare_ending():
         
 
 def ominous_spirit_riddle_ending():
-    print("If the spirit had a brow, it would be furrowed. He stands in silence for a moment, as though trying ")
-    print("to figure out how you did it. After some time, he snaps out of it and his eyes focus on you. ")
-    print("'You're not like the others... I don't know how, or why, but you're not. And for that, I give you this: ")
+    print("If the spirit had a brow, it would be furrowed. He stands in silence for a moment, as ")
+    print("though trying to figure out how you did it. After some time, he snaps out of it and his ")
+    print("eyes focus on you.")
+    print("'You're not like the others... I don't know how, or why, but you're not. And for that, ")
+    print("I give you this: ")
     main_character.inv.add_item("Spirit's Blessing")
-    print("You feel a rush wash over you, and your bloodlust fades. You look to the spirit, but he simply moves aside. ")
-    print("You keep your head down as you pass the Ominous Spirit. Soon you come to the end of the ")
-    print("tunnel. The air smells fresh. Like pines and clear sky. You take one final look back.")
-    print("Misery. A bad dream, and nothing more. You're free.")
+    print("You feel a rush wash over you, and your bloodlust fades. You look to the spirit, but he  ")
+    print("simply moves aside. You keep your head down as you pass the Ominous Spirit. Soon you")
+    print("come to the end of the tunnel. The air smells fresh. Like pines and clear sky. You take")
+    print("one final look back. Misery. A bad dream, and nothing more. You're free.")
     print("Your heart unclenches, and you move onwards, propelled by the Ominous Spirit's blessing.")
     #CREDITS GO HERE
     notebook.reset_notebook()
@@ -242,32 +245,35 @@ def ominous_spirit_riddle_ending():
 
 
 def main_door_full_blood_glut_ending():
-    print("You look back at the wretched place that contained you for so long, wondering if setting it ablaze would be too much.")
-    print("It's not worth it, you think. There's prey to hunt, and the darkness calls you forward.")
-    print("You throw an impossbily-strong kick, ripping the large wooden doors off their hinges and stepping outside.")
-    print("Your skin boils in the sunlight as the prisoners run past you, fear-struck by your smoking form. You have become everything you hate.")
+    print("You look back at the wretched place that contained you for so long, wondering if setting ")
+    print("it ablaze would be too much. It's not worth it, you think. There's prey to hunt, and the")
+    print("darkness calls you forward. You throw an impossbily-strong kick, ripping the large wooden")
+    print("doors off their hinges and stepping outside. Your skin boils in the sunlight as the prisoners")
+    print("run past you, fear-struck by your smoking form. You have become everything you hate.")
     print("The last thing you remember is the unbearably hot sun beating down, melting your flesh...")
     #ASCII ART GOES HERE "THE END"
     notebook.reset_notebook()
     ask_if_play_again()
 
 def main_door_ending_with_key():
-    print("You look back at the wretched place that contained you for so long, wondering if setting it ablaze would be too much.")
-    print("It's not worth it, you think. Maybe one day, someone will live here. Someone nice. Someone kind.")
-    print("You insert the Master Key into the lock and swing the large wooden doors forward, stepping outside.")
-    print("Your skin tingles in the sunlight, a ghost of the pain it might have caused you if you'd transitioned.")
-    print("The last thing you remember are the prisoners rushing past you, free at last.")
+    print("You look back at the wretched place that contained you for so long, wondering if setting it")
+    print("ablaze would be too much. It's not worth it, you think. Maybe one day, someone will live ")
+    print("here. Someone nice. Someone kind. You insert the Master Key into the lock and swing the large ")
+    print("wooden doors forward, stepping outside. Your skin tingles in the sunlight, a ghost of the ")
+    print("pain it might have caused you if you'd transitioned.The last thing you remember are the prisoners ")
+    print("rushing past you, free at last.")
     print("You smile. It's finally over.")
     #ASCII ART GOES HERE "THE END"
     notebook.reset_notebook()
     ask_if_play_again()
 
 def main_door_ending_without_key():
-    print("You look back at the wretched place that contained you for so long, wondering if setting it ablaze would be too much.")
-    print("It's not worth it, you think. Maybe one day, someone will live here. Someone nice. Someone kind.")
-    print("You throw an impossbily-strong kick, ripping the large wooden doors off their hinges and stepping outside.")
-    print("Your skin tingles in the sunlight, a ghost of the pain it might have caused you if you'd transitioned.")
-    print("The last thing you remember are the prisoners rushing past you, free at last.")
+    print("You look back at the wretched place that contained you for so long, wondering if setting it")
+    print("ablaze would be too much.It's not worth it, you think. Maybe one day, someone will live here.")
+    print("Someone nice. Someone kind. You throw an impossbily-strong kick, ripping the large wooden doors ")
+    print("off their hinges and stepping outside. Your skin tingles in the sunlight, a ghost of the pain ")
+    print("it might have caused you if you'd transitioned.The last thing you remember are the prisoners ")
+    print("rushing past you, free at last.")
     print("You smile. It's finally over.")
     #ASCII ART GOES HERE "THE END"
     notebook.reset_notebook()
@@ -405,10 +411,22 @@ end_prompt_list = ["Yes",
 
 
 
-print("You awaken in a castle cell. Blood drips steadily from the bricks above, splashing into a rusty basin. The moans of distant prisoners fill the halls. (TODO. TAPTAPTAP.sleep(1)) In the corner is a pile of bones. Past prisoners.")
-print("The bite marks on your body are from him: Dracula. You're his personal blood bag.")
-print("Something's different, though. Your bite marks are healing, and the strength in your limbs wills you to fight back. What's happening to you?")
-time.sleep(1)
+print("You awaken in a castle cell. Blood drips steadily from the bricks above, splashing into a rusty basin.")
+time.sleep(3)
+print("Tap...")
+time.sleep(1.5)
+print("Tap...")
+time.sleep(1.5)
+print("Tap...")
+time.sleep(1.5)
+print("The moans of distant prisoners fill the halls. In the corner is a pile of bones. Past prisoners.")
+time.sleep(3.5)
+print("The bite marks on your body are from Dracula. You're a blood slave. Something's different, though.")
+time.sleep(3.5)
+print("Your bite marks are healing, and the strength in your limbs wills you to fight back.")
+time.sleep(3.5)
+print("What's happening to you?")
+time.sleep(3)
 while True:
     display_stats()
     options(cell_prompt_list_1_1, cell)
@@ -425,7 +443,8 @@ while True:
     while user_input == "1":
         if main_character.bloodglut < 20:
             print("You walk over to the pile of bones.")
-            print("Poor chap, you think. Lazily, your eyes drift over to the cell door, then back to the bones. Hmmm... If only you were stronger...")
+            print("Poor chap, you think. Lazily, your eyes drift over to the cell door, then back to the bones.")
+            print("Hmmm... If only you were stronger...")
             break
         elif main_character.bloodglut >= 20:
             options(cell_prompt_list_1_2, cell)
@@ -471,11 +490,13 @@ while True:
         if user_input_2_1  == "4":
             break
     while user_input == "3":
-        print("'Help me', calls one prisoner. 'Please', calls another. They're Dracula's play things. Nothing to him but chaffe. Your will cements. You must escape.")
+        print("'Help me', calls one prisoner. 'Please', calls another. They're Dracula's play things.")
+        print("Treated like nothing but chaffe. Your will cements. You must escape.")
         break
 
     while user_input == "4":
-        print("You reach your arms up, looking closely at the bite marks made by Dracula. You think of the countless times you've been fed on and you seethe...")
+        print("You reach your arms up, looking closely at the bite marks made by Dracula. You think of")
+        print("the countless times you've been fed on and you seethe...")
         time.sleep(1)
         break
     
@@ -485,9 +506,11 @@ while True:
             print("You step through the opened cell door.")
         elif main_character.inv.has_item("Bone Key"):
             cell_door_open = True
-            print("You jam the bone key into the cell door keyhole, breaking it but snapping the lock open at the same time. The door slides wide open and you step through into a hallway.")
+            print("You jam the bone key into the cell door keyhole, breaking it but snapping the lock open at ")
+            print("the same time. The door slides wide open and you step through into a hallway.")
             main_character.inv.remove_item("Bone Key")
-            print("The prisoners moan and wail at you to let them out. To the left of you is a door labelled 'Treasury'. You can hear coins clinking behind it, but no speaking.")
+            print("The prisoners moan and wail at you to let them out. To the left of you is a door labelled ")
+            print("'Treasury'. You can hear coins clinking behind it, but no speaking.")
             print("To your right is a door named 'Armoury'. Behind it, Dracula's guards laugh and joust.")
             print("Before you is a wide door that appears to lead outside.")
             cell_door_opened_once = True
@@ -868,7 +891,5 @@ while True:
                 break
             if cell_room_user_input == "6":
                 exit_cell_room = True
-        
         if exit_cell_room:
-            break
-            
+            break   
