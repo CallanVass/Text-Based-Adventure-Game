@@ -13,12 +13,14 @@ dig_counter = 1
 tunnel_travelled_down = False
 ominous_spirit_stare_counter = 1
 asked_riddle = False
+guard_killed_counter = 0
 bowed_before_ominous_spirit = False
 tunnel_prompt_list_1_asked = False
 main_character_is_vampire = False
 treasury_guard_dead = False
 armoury_guards_dead = False
 armoury_entered = False
+dracula_killed = False
 
 # main_character.check_stats()
 notebook = Notebook()
@@ -87,6 +89,8 @@ def quick_time_event(character, time_limit, health_lost, room):
                     print("You feed, throwing the body aside like a wet blanket!")
                     main_character.add_blood_glut(10)
                     enemy_killed = True
+                    global guard_killed_counter
+                    guard_killed_counter += 1
                     break
                 while quick_user_input_1 == "2":
                     print("You throw the body aside, refusing to indulge in your dark desires!")
@@ -116,6 +120,16 @@ def ask_if_play_again():
         print("Thanks for playing!")
         time.sleep(1)
         raise SystemExit
+
+def self_bludgeon_ending():
+    print("The thought of actually trying makes you extremely fed up.")
+    print("Welp, you think, I guess this is better than round-the-clock-torture.")
+    print("Then again... you think, but before you can change your mind, you")
+    print("slip on a small pool of blood smack your head on the sink. Nice one,")
+    print("doofus.")
+    #CREDITS GO HERE
+    notebook.reset_notebook()
+    ask_if_play_again()
 
 def ominous_spirit_stare_ending():
     if prisoners_free == False:
@@ -206,6 +220,7 @@ cell_prompt_list_1_2 = ["Snap a femur and shave it down to a sizeable 'key'",
 #"Examine the bloody basin."
 cell_prompt_list_2_1 = ["Take a sip",
                       "Look underneath",
+                      "Bludgeon yourself on the basin.",
                       "Go back"]
 
 #CELL ROOM LOGIC
@@ -258,9 +273,14 @@ armoury_prompt_list_3 = ["Go forward to Dracula's Chambers.",
 
 dracula_prompt_list_1 = ["'You deserve to die for what you've done to these people.'",
                          "'You've lived for long enough, don't you think?'",
-                         "'Actually, I've left a pile of bodies behind me the whole way here. I have zero moral agency.'"
+                         "'Actually, I've left a pile of bodies behind me the whole way here. I have zero moral agency.'",
                          "Go back."]
 
+dracula_prompt_list_2 = ["'You deserve to die for what you've done to these people.'",
+                         "'You've lived for long enough, don't you think?'",
+                         "'I'm not entirely exempt, either. But you need to be stopped'",
+                         "Enough chit chat. Let's fight."
+                         "Go back."]
 
 end_prompt_list = ["Yes",
                    "No"]
@@ -328,9 +348,10 @@ while True:
             print("You kneel down and look under the sink to see someone has engraved some text.")
             print("'Something always yearns. Don't ever accept this hell.'")
             break
-        if user_input_2_1  == "3":
+        while user_input_2_1  == "3":
+            self_bludgeon_ending()
+        if user_input_2_1  == "4":
             break
-        
     while user_input == "3":
         print("'Help me', calls one prisoner. 'Please', calls another. They're Dracula's play things. Nothing to him but chaffe. Your will cements. You must escape.")
         break
@@ -606,16 +627,31 @@ while True:
                             print("throne, a devious smile spread upon her lips.")
                             print("'I can only presume you're here to kill me,' she says, her smirk growing wider.")
                             display_stats()
-                            options(dracula_prompt_list_1, dracula_chambers)
+                            if servant_killed == True and guard_killed_counter >= 1:
+                                options(dracula_prompt_list_1, dracula_chambers)
+                            else:
+                                options(dracula_prompt_list_2, dracula_chambers)
                             dracula_chambers_user_input_3 = input(">>> ")
                             if dracula_chambers_user_input_3 == "1":
-                                pass
+                                print("'Do I really?' she asks. 'People kill animals all the time. What's the difference?")
+                                print("'People aren't animals, there slaves. They want to live,' you remind her. Much good it will do.")
+                                print("Dracula's eyes take on a light glow. 'I've never seen an animal that wants to die.'")
+                                print("She breaks into a tinkling laugh, rattling the plates of her armour.")
                             if dracula_chambers_user_input_3 == "2":
-                                pass
+                                print("'It's never enough. Not really. I suspect you're beginning to realise this seeing")
+                                print("as you're becoming exactly like me.'")
                             if dracula_chambers_user_input_3 == "3":
-                                pass
-                            if dracula_chambers_user_input_3 == "4":
-                                pass
+                                print("Yes, you do display the high level of corruptness that I've come to ask of my servants.")
+                                print("'I'm not corrupt,' you point out.")
+                                print("Dracula snorts, her small pale nose facing the floor as she giggles. What an odd sound.")
+                                print("She leans in closer and whispers loudly 'We're all corrupt.'")
+                            while dracula_chambers_user_input_3 == "4":
+                                print("'If you insist.'")
+                            if dracula_chambers_user_input_3 == "5":
+                                if dracula_killed == False:
+                                    print("There is no going back. One way or another, this ends now.")
+                                else: 
+                                    break
 
 
                         if armoury_user_input_3 == "2":
