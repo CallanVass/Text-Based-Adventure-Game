@@ -82,8 +82,8 @@ def remove_last_option(prompt_list, new_prompt):
 #CHECKING CHARACTER HEALTH FUNCTION
 def check_character_health():
     if main_character.health <= 0:
-        print(ct.convert("<>red YOU LOST ALL YOUR HEALTH.<>"))
-        print(ct.convert("<>red GAME OVER!<>"))
+        you_died()
+        time.sleep(5)
         ask_if_play_again()
 
 #FOUND BY 1 GUARD FUNCTION (TREASURY AND ARMOURY)
@@ -427,6 +427,31 @@ def dracula_spared_ending():
     notebook.reset_notebook()
     ask_if_play_again()
 
+#ASCII ART FUNCTIONS
+def draculas_castle():
+    print(ct.convert("<>magenta ▓█████▄  ██▀███   ▄▄▄       ▄████▄   █    ██  ██▓    ▄▄▄        ██████     ▄████▄   ▄▄▄        ██████ ▄▄▄█████▓ ██▓    ▓█████  ▐██▌ <>"))
+    print(ct.convert("<>magenta ▒██▀ ██▌▓██ ▒ ██▒▒████▄    ▒██▀ ▀█   ██  ▓██▒▓██▒   ▒████▄    ▒██    ▒    ▒██▀ ▀█  ▒████▄    ▒██    ▒ ▓  ██▒ ▓▒▓██▒    ▓█   ▀  ▐██▌ <>"))
+    print(ct.convert("<>magenta ░██   █▌▓██ ░▄█ ▒▒██  ▀█▄  ▒▓█    ▄ ▓██  ▒██░▒██░   ▒██  ▀█▄  ░ ▓██▄      ▒▓█    ▄ ▒██  ▀█▄  ░ ▓██▄   ▒ ▓██░ ▒░▒██░    ▒███    ▐██▌ <>"))
+    print(ct.convert("<>magenta ░▓█▄   ▌▒██▀▀█▄  ░██▄▄▄▄██ ▒▓▓▄ ▄██▒▓▓█  ░██░▒██░   ░██▄▄▄▄██   ▒   ██▒   ▒▓▓▄ ▄██▒░██▄▄▄▄██   ▒   ██▒░ ▓██▓ ░ ▒██░    ▒▓█  ▄  ▓██▒ <>"))
+    print(ct.convert("<>magenta ░▒████▓ ░██▓ ▒██▒ ▓█   ▓██▒▒ ▓███▀ ░▒▒█████▓ ░██████▒▓█   ▓██▒▒██████▒▒   ▒ ▓███▀ ░ ▓█   ▓██▒▒██████▒▒  ▒██▒ ░ ░██████▒░▒████▒ ▒▄▄  <>"))
+    print(ct.convert("<>magenta  ▒▒▓  ▒ ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ░▒ ▒  ░░▒▓▒ ▒ ▒ ░ ▒░▓  ░▒▒   ▓▒█░▒ ▒▓▒ ▒ ░   ░ ░▒ ▒  ░ ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░  ▒ ░░   ░ ▒░▓  ░░░ ▒░ ░ ░▀▀▒ <>"))
+    print(ct.convert("<>magenta  ░ ▒  ▒   ░▒ ░ ▒░  ▒   ▒▒ ░  ░  ▒   ░░▒░ ░ ░ ░ ░ ▒  ░ ▒   ▒▒ ░░ ░▒  ░ ░     ░  ▒     ▒   ▒▒ ░░ ░▒  ░ ░    ░    ░ ░ ▒  ░ ░ ░  ░ ░  ░ <>"))
+    print(ct.convert("<>magenta  ░ ░  ░   ░░   ░   ░   ▒   ░         ░░░ ░ ░   ░ ░    ░   ▒   ░  ░  ░     ░          ░   ▒   ░  ░  ░    ░        ░ ░      ░       ░ <>"))
+    print(ct.convert("<>magenta    ░       ░           ░  ░░ ░         ░         ░  ░     ░  ░      ░     ░ ░            ░  ░      ░               ░  ░   ░  ░ ░    <>"))
+    print(ct.convert("<>magenta  ░                         ░                                              ░                                                         <>"))
+
+def you_died():
+    print(ct.convert("<>red    ▓██   ██▓ ▒█████   █    ██    ▓█████▄  ██▓▓█████ ▓█████▄ <>"))
+    print(ct.convert("<>red  ▒██  ██▒▒██▒  ██▒ ██  ▓██▒   ▒██▀ ██▌▓██▒▓█   ▀ ▒██▀ ██▌<>"))
+    print(ct.convert("<>red   ▒██ ██░▒██░  ██▒▓██  ▒██░   ░██   █▌▒██▒▒███   ░██   █▌<>"))
+    print(ct.convert("<>red   ░ ▐██▓░▒██   ██░▓▓█  ░██░   ░▓█▄   ▌░██░▒▓█  ▄ ░▓█▄   ▌<>"))
+    print(ct.convert("<>red   ░ ██▒▓░░ ████▓▒░▒▒█████▓    ░▒████▓ ░██░░▒████▒░▒████▓ <>"))
+    print(ct.convert("<>red    ██▒▒▒ ░ ▒░▒░▒░ ░▒▓▒ ▒ ▒     ▒▒▓  ▒ ░▓  ░░ ▒░ ░ ▒▒▓  ▒ <>"))
+    print(ct.convert("<>red  ▓██ ░▒░   ░ ▒ ▒░ ░░▒░ ░ ░     ░ ▒  ▒  ▒ ░ ░ ░  ░ ░ ▒  ▒ <>"))
+    print(ct.convert("<>red  ▒ ▒ ░░  ░ ░ ░ ▒   ░░░ ░ ░     ░ ░  ░  ▒ ░   ░    ░ ░  ░ <>"))
+    print(ct.convert("<>red  ░ ░         ░ ░     ░           ░     ░     ░  ░   ░    <>"))
+    print(ct.convert("<>red  ░ ░                           ░                  ░      <>"))
+
 #OPTION LISTS FOR EACH ROOM
 #CELL LISTS
 cell_prompt_list_1_1 = ["Examine the pile of bones.", 
@@ -522,3 +547,4 @@ dracula_prompt_list_3 = ["Exit the room."]
 #END PROMPT LIST
 end_prompt_list = ["Yes",
                    "No"]
+
