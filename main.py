@@ -26,10 +26,10 @@ while True:
             print("Poor chap, you think. Lazily, your eyes drift over to the cell door, then back to the bones.")
             time.sleep(0.3)
             print("Hmmm... If only you were stronger...")
-            time.sleep(5)
             break
 
         elif main_character.bloodglut >= 20:
+            print("You examine the pile of bones")
             options(cell_prompt_list_1_2, cell)
             user_input_1_2 = input(">>> ")
             can_write(user_input_1_2)
@@ -54,7 +54,6 @@ while True:
                     print("HINT: Type 'Write' into the terminal to carve text into your arm.")
                     time.sleep(0.3)
                     main_character.inv.add_item("Bone Pen")
-                    time.sleep(6)
                     break
             if user_input_1_2 == "3":
                 print("You go back.")
@@ -78,7 +77,6 @@ while True:
             print("You kneel down and look under the sink to see someone has engraved some text.")
             time.sleep(0.3)
             print(ct.convert("<>yellow 'Something always yearns. Don't ever accept this hell.'<>"))
-            time.sleep(4)
             break
         while user_input_2_1  == "3":
             self_bludgeon_ending()
@@ -89,14 +87,12 @@ while True:
         print("'Help me', calls one prisoner. 'Please', calls another. They're Dracula's play things.")
         time.sleep(0.3)
         print("Treated like nothing but chaffe. Your will cements. You must escape.")
-        time.sleep(4)
         break
     #Option 4
     while user_input == "4":
         print("You reach your arms up, looking closely at the bite marks made by Dracula. You think of")
         time.sleep(0.3)
         print("the countless times you've been fed on and you seethe...")
-        time.sleep(4)
         break
     #Option 5
     while user_input == "5":
@@ -118,8 +114,7 @@ while True:
             time.sleep(0.3)
             print("To your right is a door named 'Armoury'. Behind it, Dracula's guards laugh and joust.")
             time.sleep(0.3)
-            print("Before you is a wide door that appears to lead outside.")
-            time.sleep(10)
+            print("Before you is a wide, closed door that appears to lead outside. Something is carved into it.")
             cell_door_opened_once = True
         else:
             if cell_door_opened_once:
@@ -145,7 +140,6 @@ while True:
                     print("Silently, you enter a well lit room with piles upon piles of golden coins strewn about the place.")
                     time.sleep(0.3)
                     print("A blind servant sits at a rickety table, counting coins and placing them into bags.")
-                    time.sleep(5)
                     display_stats()
                     options(treasury_prompt_list_1_1, treasury)
                     treasury_room_user_input = input(">>> ")
@@ -161,8 +155,8 @@ while True:
                         print("You sieze the servant, ripping into his neck and drinking deeply. With nobody to stop you,")
                         time.sleep(0.3)
                         print("you're able to drink your fill.")
+                        time.sleep(0.3)
                         main_character.add_blood_glut(30)
-                        time.sleep(4)
                         servant_killed = True
                         break
                     elif servant_unconscious == True:
@@ -171,8 +165,8 @@ while True:
                         print("You pick the man up off the floor and tear into his neck. With nobody to stop you,")
                         time.sleep(0.3)
                         print("you're able to drink your fill.")
+                        time.sleep(0.3)
                         main_character.add_blood_glut(30)
-                        time.sleep(4)
                         servant_killed = True
                     else:
                         print("He can't get any dead-er than he is.")
@@ -187,7 +181,6 @@ while True:
                     can_write(treasury_room_user_input_1)
                     while treasury_room_user_input_1 == "1":
                         print("Your teeth sink straight through the metal. Yep, that's real gold alright.")
-                        time.sleep(3)
                         break
                     while treasury_room_user_input_1 == "2":
                         if main_character.inv.has_item("Gold Key"):
@@ -196,8 +189,8 @@ while True:
                             break
                         else:
                             print("You grab a couple gold coins and get to work, compressing them like clay and fashioning yourself a key.")
+                            time.sleep(0.3)
                             main_character.inv.add_item("Gold Key")
-                            time.sleep(4)
                             break
                     if treasury_room_user_input_1 == "3":
                         break
@@ -207,7 +200,6 @@ while True:
                         print("With a hard backhand, you clop the servant over the head. He falls to the ground,")
                         time.sleep(0.3)
                         print("moaning for a moment before going still. His wheezing breaths fill the chamber. How annoying.")
-                        time.sleep(4)
                         servant_unconscious = True
                         break
                     elif servant_killed == True:
@@ -227,7 +219,6 @@ while True:
                         break
                     else:
                         print("You approach the door, which is mostly-obscured by piles of coins.")
-                        time.sleep(2)
                         display_stats()
                         if tunnel_door_opened:
                             options(treasury_prompt_list_1_3_1, treasury)
@@ -240,7 +231,6 @@ while True:
                             if dig_counter >= 3:
                                 tunnel_door_opened = True
                                 print("You stand before a dark tunnel with a yellow glowing light at the end of it.")
-                                time.sleep(2.5)
                                 display_stats()
                                 options(tunnel_prompt_list_1, tunnel)
                                 treasury_room_user_input_3 = input(">>> ")
@@ -256,7 +246,6 @@ while True:
                                         print("yourself standing before a shadowy figure with two monstrous eyes. The figure hovers ")
                                         time.sleep(0.3)
                                         print("before a tunnel.")
-                                        time.sleep(10)
                                         tunnel_travelled_down = True
                                     display_stats()
                                     if asked_riddle == False:
@@ -270,7 +259,6 @@ while True:
                                             print("'What is this? Get up. Bow again and rip you to shreds,' he says.")
                                             time.sleep(0.3)
                                             print("How pleasant.")
-                                            time.sleep(4)
                                             bowed_before_ominous_spirit = True
                                             break
                                         else:
@@ -279,10 +267,9 @@ while True:
                                             print("The Ominous Spirit lashes out.")
                                             main_character.lose_health(40)
                                             check_character_health()
-                                            time.sleep(3)
                                             break
                                     while tunnel_user_input_2 == "2":
-                                        if main_character.bloodglut <= 50:
+                                        if main_character.bloodglut >= 50:
                                             print("'Look at you - all gorged on blood. And now you want my help? I don't think so.'")
                                             break
                                         if asked_riddle == False:
@@ -297,7 +284,6 @@ while True:
                                             print(ct.convert("<>yellow I was before, and I will be again.'<>"))
                                             time.sleep(0.3)
                                             print("What am I?'")
-                                            time.sleep(10)
                                             asked_riddle = True
                                         else:
                                             print("'Back to make another guess? Come on then, let's hear it.'")
@@ -327,7 +313,7 @@ while True:
                                             print("The Ominous Spirit stares straight back at you, piercing your very soul. Something ")
                                             time.sleep(0.3)
                                             print("inside you goes cold. You shiver.")
-                                            time.sleep(4)
+                                            time.sleep(2.5)
                                             ominous_spirit_stare_counter += 1
                                             break
                                         elif ominous_spirit_stare_counter >= 5 and ominous_spirit_stare_counter < 10:
@@ -359,7 +345,7 @@ while True:
                                     attacked_by_one_guard(1.5, treasury)
                                     treasury_guard_dead = True
                                 else:
-                                    print("You dig successfully without being heard!")
+                                    print("You dig some of the coins away without being heard!")
                                     time.sleep(2)
                                     dig_counter += 1
                                 break
@@ -367,10 +353,9 @@ while True:
                                 break
                         #Option 2
                         if treasury_room_user_input_2 == "2":
-                            print("It reads: 'No bloodbag is to enter here until I've dealt with it's occupant.'")
+                            print("It reads: 'No bloodbag is to enter here until I've dealt with its occupant.'")
                             time.sleep(0.3)
                             print("Signed: Dracula")
-                            time.sleep(4)
                         #Option 3
                         if treasury_room_user_input_2 == "3":
                             break
@@ -394,7 +379,6 @@ while True:
                     print("You go back and forth, forging bone-shaped keys and smashing them into the locks one by one.")
                     time.sleep(0.3)
                     print("The prisoners have been freed! They huddle around the main door, too scared to do anything else.")
-                    time.sleep(5)
                     prisoners_free = True
                     break
                 elif main_character.bloodglut < 50:
@@ -471,7 +455,6 @@ while True:
                                 print("throne and descends a couple steps.")
                                 time.sleep(0.3)
                                 print(ct.convert("<>magenta 'I can only presume you're here to kill me,'<> she says, her smirk growing wider."))
-                                time.sleep(12)
                                 display_stats()
                                 dracula_chambers_entered = True
                             else:
@@ -501,13 +484,11 @@ while True:
                                 print(ct.convert("<>magenta Yet here you are,'<> she whispers, breaking into a tinkling laugh so violent it rattles"))
                                 time.sleep(0.3)
                                 print("the plates of her armour.")
-                                time.sleep(10)
                             #Option 2
                             if dracula_chambers_user_input_3 == "2":
                                 print(ct.convert("<>magenta 'It's never enough. Not really. I suspect you're beginning to realise this seeing<>"))
                                 time.sleep(0.3)
                                 print(ct.convert("<>magenta as how you're becoming exactly like me.'<>"))
-                                time.sleep(6)
                             #Option 3
                             if dracula_chambers_user_input_3 == "3":
                                 print(ct.convert("<>magenta 'Yes, you do display the explicit level of corruption that I've come to demand of my servants.'<>"))
@@ -517,7 +498,6 @@ while True:
                                 print("Dracula snorts, her small pale nose facing the floor as she giggles. What an odd sound.")
                                 time.sleep(0.3)
                                 print(ct.convert("She leans in closer and whispers. <>magenta 'Corruption is a matter of perspective.'<>"))
-                                time.sleep(10)
                             #Option 4
                             while dracula_chambers_user_input_3 == "4":
                                 print(ct.convert("<>magenta 'If you insist...'<>"))
@@ -526,7 +506,7 @@ while True:
                                 dracula.check_dracula_stats()
                                 time.sleep(1)
                                 print("In a blinding flash, she strikes out with her claws.")
-                                time.sleep(1)
+                                time.sleep(3)
                                 fight_with_dracula(main_character, 0.8, 35)
                                 dracula.check_dracula_stats()
                                 display_stats()
@@ -535,18 +515,18 @@ while True:
                                 print(ct.convert("<>magenta 'Then try this.'<>"))
                                 time.sleep(0.3)
                                 print("A blinding attack comes for you.")
-                                time.sleep(5)
+                                time.sleep(7)
                                 fight_with_dracula(main_character, 0.5, 35)
                                 dracula.check_dracula_stats()
                                 display_stats()
                                 print("She smiles and a spurt of blood jumps from her throat.")
                                 time.sleep(0.3)
                                 print(ct.convert("<>magenta 'You're quick. Not quick enough, though.'<>"))
-                                time.sleep(2.6)
+                                time.sleep(5)
                                 fight_with_dracula(main_character, 0.5, 35)
                                 dracula.check_dracula_stats()
                                 display_stats()
-                                print("As she crashes into her throne, as serious gasp exits her mouth.")
+                                print("As she crashes into her throne, a serious gasp exits her mouth.")
                                 time.sleep(0.3)
                                 print("You press the advantage, leaping across the room and grabbing her by the throat")
                                 time.sleep(0.3)
@@ -555,7 +535,7 @@ while True:
                                 print("every direction. ")
                                 time.sleep(0.3)
                                 print("Like stray lightning, Dracula reaches for you.")
-                                time.sleep(7.5)
+                                time.sleep(10)
                                 fight_with_dracula(main_character, 0.3, 35)
                                 dracula.check_dracula_stats()
                                 display_stats()
@@ -609,7 +589,6 @@ while True:
                             print("'Curse this affliction,' you murmur.")
                             time.sleep(0.3)
                             check_character_health()
-                            time.sleep(4.5)
                         #Option 3
                         if armoury_user_input_3 == "3":
                             break
@@ -631,10 +610,9 @@ while True:
                     main_door_ending_without_key() 
             #Option 5
             while cell_room_user_input == "5":
-                print("You step closer, reading the quote plainly with your imporved vision.")
+                print("You step closer, reading the carving plainly with your improved vision.")
                 time.sleep(0.3)
                 print(ct.convert("<>yellow 'I'll tear spleens, defeat everything and this hell to get what I want.'<>"))
-                time.sleep(6)
                 break
             #Option 6
             if cell_room_user_input == "6":

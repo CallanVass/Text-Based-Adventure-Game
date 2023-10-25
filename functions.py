@@ -104,7 +104,6 @@ def ask_if_play_again():
         restart_program()
     elif end_user_input == "2":
         print("Thanks for playing!")
-        time.sleep(1)
         raise SystemExit
 
 #CHANCE FUNCTION
@@ -233,8 +232,6 @@ def intro():
     print("Your bite marks are healing, and the strength in your limbs wills you to fight back.")
     time.sleep(0.3)
     print("What's happening to you?")
-    time.sleep(6)
-
 
 #BELOW ARE ENDING FUCTIONS. TITLES ARE INDICATIVE
 def self_bludgeon_ending():
@@ -474,7 +471,7 @@ cell_room_prompt_list_1_1 = ["Enter Treasury Room.",
                              "Free the prisoners.",
                              "Enter Armoury. (* 100% chance of conflict *)",
                              "Try the door to freedom",
-                             "Check engraving on the door.",
+                             "Check carving on the door.",
                              "Go back into the Cell"]
 
 cell_room_prompt_list_1_2 = ["Enter Treasury Room.",
