@@ -1,7 +1,8 @@
+#IMPORTS
 import time
 import random
 
-
+#CLASSES
 class Character:
     def __init__(self, name):
         self.name = name
@@ -74,28 +75,7 @@ class Notebook:
     def reset_notebook(self):
         with open("notebook.txt", "w") as file:
             pass
-
-class Chance:
-    def chance_of_success(self, percentage):
-        random_nums = [random.randint(1, 10) for _ in range(percentage)]
-        if percentage == 1:
-            if 1 in random_nums:
-                print("Your attempt fails!")
-            else:
-                print("Your attempt succeeds!")
-        if percentage == 2:
-            if any(value in random_nums for value in (1, 2)):
-                print("Your attempt fails!")
-            else:
-                print("Your attempt succeeds!")
-        if percentage == 3:
-            if any(value in random_nums for value in (1, 2, 3)):
-                print("Your attempt fails!")
-            else:
-                print("Your attempt succeeds!")
-        if percentage >= 4:
-            print("Callan, you dolt, that's a stupidly high percentage. Change it right now.")
-
+        
 class Room:
     def __init__(self, name, inv):
         self.inv = Inventory()
