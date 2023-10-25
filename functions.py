@@ -441,7 +441,7 @@ def draculas_castle():
     print(ct.convert("<>magenta  ░                         ░                                              ░                                                         <>"))
 
 def you_died():
-    print(ct.convert("<>red    ▓██   ██▓ ▒█████   █    ██    ▓█████▄  ██▓▓█████ ▓█████▄ <>"))
+    print(ct.convert("<>red  ▓██   ██▓ ▒█████   █    ██    ▓█████▄  ██▓▓█████ ▓█████▄<>"))
     print(ct.convert("<>red  ▒██  ██▒▒██▒  ██▒ ██  ▓██▒   ▒██▀ ██▌▓██▒▓█   ▀ ▒██▀ ██▌<>"))
     print(ct.convert("<>red   ▒██ ██░▒██░  ██▒▓██  ▒██░   ░██   █▌▒██▒▒███   ░██   █▌<>"))
     print(ct.convert("<>red   ░ ▐██▓░▒██   ██░▓▓█  ░██░   ░▓█▄   ▌░██░▒▓█  ▄ ░▓█▄   ▌<>"))
