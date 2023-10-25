@@ -1,7 +1,12 @@
+#IMPORTS
 from classes import *
 import time
 import random
 import subprocess
+from colour_text import ColourText
+
+ct = ColourText()
+ct.initTerminal()
 
 #GLOBAL FLAG VARIABLES
 cell_door_open = False
@@ -59,7 +64,7 @@ def options(option_list, room):
     time.sleep(0.3)
     room.get_name()
     for index, option in enumerate(option_list):
-        print(f"Option {index + 1}: {option}")
+        print(ct.convert(f"<>cyan Option {index + 1}:<> {option}"))
         time.sleep(0.2)
     return
 
@@ -77,8 +82,8 @@ def remove_last_option(prompt_list, new_prompt):
 #CHECKING CHARACTER HEALTH FUNCTION
 def check_character_health():
     if main_character.health <= 0:
-        print("YOU LOST ALL YOUR HEALTH.")
-        print("GAME OVER!")
+        print(ct.convert("<>red YOU LOST ALL YOUR HEALTH.<>"))
+        print(ct.convert("<>red GAME OVER!<>"))
         ask_if_play_again()
 
 #FOUND BY 1 GUARD FUNCTION (TREASURY AND ARMOURY)
@@ -210,18 +215,6 @@ def fight_with_dracula(character, time_limit, health_lost):
             character.lose_health(health_lost)
             check_character_health()
             break
-
-#CHECK HEALTH FUNCTION (CHECK FOR GAME OVER CIRCUMSTANCE)
-def check_character_health():
-    if main_character.health <= 0:
-        print("YOU LOST ALL YOUR HEALTH.")
-        print("GAME OVER!")
-        ask_if_play_again()
-
-#FOUND BY 1 GUARD FUNCTION (1 FIGHT INSTANCE)
-def attacked_by_one_guard(time_limit_for_sequence, room):
-    time.sleep(1.5)
-    quick_time_event(main_character, time_limit_for_sequence, 30, room)
 
 #INTRO FUNCTION 
 def intro():

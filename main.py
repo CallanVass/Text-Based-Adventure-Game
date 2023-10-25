@@ -5,6 +5,7 @@ import time
 # import random
 # import subprocess
 from functions import *
+from colour_text import ColourText
 
 #INTRODUCTION
 intro()
@@ -42,7 +43,7 @@ while True:
                     break
             while user_input_1_2 == "2":
                 if main_character.inv.has_item("Bone Pen"):
-                    print("You've already done this.")
+                    print("You've already done that.")
                     time.sleep(1)
                     break
                 else:
@@ -74,7 +75,7 @@ while True:
         while user_input_2_1 == "2":
             print("You kneel down and look under the sink to see someone has engraved some text.")
             time.sleep(0.3)
-            print("'Something always yearns. Don't ever accept this hell.'")
+            print(ct.convert("<>yellow 'Something always yearns. Don't ever accept this hell.'<>"))
             time.sleep(4)
             break
         while user_input_2_1  == "3":
@@ -244,7 +245,7 @@ while True:
                                 can_write(treasury_room_user_input_3)
                                 while treasury_room_user_input_3 == "1":
                                     if tunnel_travelled_down == False:
-                                        print("You venture down the tunnel, closing the distance between you and the yellow light.")
+                                        print(ct.convert("You venture down the tunnel, closing the distance between you and the <>yellow yellow<> light."))
                                         time.sleep(0.3)
                                         print("As you near, you realise it's not a light, but two lights. You go to turn back, but ")
                                         time.sleep(0.3)
@@ -287,11 +288,11 @@ while True:
                                             time.sleep(0.3)
                                             print("if you can answer my riddle, I'll let you go. Here it is: ")
                                             time.sleep(0.3)
-                                            print("'I'm the timeless enigma, lurking somwhere between future and past.")
+                                            print(ct.convert("<>yellow 'I'm the timeless enigma, lurking somwhere between future and past.<>"))
                                             time.sleep(0.3)
-                                            print("To me, a sharpened pencil is closer than an unsharpened one.")
+                                            print(ct.convert("<>yellow To me, a sharpened pencil is closer than an unsharpened one.<>"))
                                             time.sleep(0.3)
-                                            print("I was before, and I will be again.")
+                                            print(ct.convert("<>yellow I was before, and I will be again.'<>"))
                                             time.sleep(0.3)
                                             print("What am I?'")
                                             time.sleep(10)
@@ -301,11 +302,11 @@ while True:
                                             time.sleep(0.3)
                                             print("'Here's the riddle again, in case you've forgotten. You probably have:'")
                                             time.sleep(0.3)
-                                            print("'I'm the timeless enigma, lurking somwhere between future and past.")
+                                            print(ct.convert("<>yellow 'I'm the timeless enigma, lurking somwhere between future and past.<>"))
                                             time.sleep(0.3)
-                                            print("To me, a sharpened pencil is closer than an unsharpened one.")
+                                            print(ct.convert("<>yellow To me, a sharpened pencil is closer than an unsharpened one.<>"))
                                             time.sleep(0.3)
-                                            print("I was before, and I will be again.")
+                                            print(ct.convert("<>yellow I was before, and I will be again.'<>"))
                                             time.sleep(0.3)
                                             print("What am I?'")
                                             time.sleep(7)
@@ -467,7 +468,7 @@ while True:
                                 time.sleep(0.3)
                                 print("throne and descends a couple steps.")
                                 time.sleep(0.3)
-                                print("'I can only presume you're here to kill me,' she says, her smirk growing wider.")
+                                print(ct.convert("<>magenta 'I can only presume you're here to kill me,'<> she says, her smirk growing wider."))
                                 time.sleep(12)
                                 display_stats()
                                 dracula_chambers_entered = True
@@ -487,39 +488,39 @@ while True:
                             can_write(dracula_chambers_user_input_3)
                             #Option 1
                             if dracula_chambers_user_input_3 == "1":
-                                print("'Do I really?' she asks. 'People kill animals all the time. What's the difference?")
+                                print(ct.convert("<>magenta 'Do I really?'<> she asks. <>magenta 'People kill animals all the time. What's the difference?<>"))
                                 time.sleep(0.3)
                                 print("'People aren't animals, and they aren't slaves either. They want to live,' you")
                                 time.sleep(0.3)
                                 print("remind her. Much good it will do.")
                                 time.sleep(0.3)
-                                print("Dracula's eyes take on a faint glow. 'I've never seen an animal that wants to die.")
+                                print(ct.convert("Dracula's eyes take on a faint glow. <>magenta 'I've never seen an animal that wanted to die.<>"))
                                 time.sleep(0.3)
-                                print("Yet here you are,' she whispers, breaking into a tinkling laugh so violent it rattles")
+                                print(ct.convert("<>magenta Yet here you are,'<> she whispers, breaking into a tinkling laugh so violent it rattles"))
                                 time.sleep(0.3)
                                 print("the plates of her armour.")
                                 time.sleep(10)
                             #Option 2
                             if dracula_chambers_user_input_3 == "2":
-                                print("'It's never enough. Not really. I suspect you're beginning to realise this seeing")
+                                print(ct.convert("<>magenta 'It's never enough. Not really. I suspect you're beginning to realise this seeing<>"))
                                 time.sleep(0.3)
-                                print("as how you're becoming exactly like me.'")
+                                print(ct.convert("<>magenta as how you're becoming exactly like me.'<>"))
                                 time.sleep(6)
                             #Option 3
                             if dracula_chambers_user_input_3 == "3":
-                                print("'Yes, you do display the explicit level of corruption that I've come to ask of my servants.'")
+                                print(ct.convert("<>magenta 'Yes, you do display the explicit level of corruption that I've come to demand of my servants.'<>"))
                                 time.sleep(0.3)
                                 print("'I'm not corrupt,' you point out.")
                                 time.sleep(0.3)
                                 print("Dracula snorts, her small pale nose facing the floor as she giggles. What an odd sound.")
                                 time.sleep(0.3)
-                                print("She leans in closer and whispers. 'Corruption is a matter of perspective.'")
+                                print(ct.convert("She leans in closer and whispers. <>magenta 'Corruption is a matter of perspective.'<>"))
                                 time.sleep(10)
                             #Option 4
                             while dracula_chambers_user_input_3 == "4":
-                                print("'If you insist...'")
+                                print(ct.convert("<>magenta 'If you insist...'<>"))
                                 time.sleep(1)
-                                print("'Then so do I.'")
+                                print(ct.convert("<>magenta 'Then so do I.'<>"))
                                 dracula.check_dracula_stats()
                                 time.sleep(1)
                                 print("In a blinding flash, she strikes out with her claws.")
@@ -527,9 +528,9 @@ while True:
                                 fight_with_dracula(main_character, 0.8, 35)
                                 dracula.check_dracula_stats()
                                 display_stats()
-                                print("She backs up, eyes glued to you as she circles. 'You think that was quick?' she asks.")
+                                print(ct.convert("She backs up, eyes glued to you as she circles. <>magenta 'You think that was quick?'<> she asks."))
                                 time.sleep(0.3)
-                                print("'Then try this.'")
+                                print(ct.convert("<>magenta 'Then try this.'<>"))
                                 time.sleep(0.3)
                                 print("A blinding attack comes for you.")
                                 time.sleep(5)
@@ -538,7 +539,7 @@ while True:
                                 display_stats()
                                 print("She smiles and a spurt of blood jumps from her throat.")
                                 time.sleep(0.3)
-                                print("'You're quick. Not quick enough, though.")
+                                print(ct.convert("<>magenta 'You're quick. Not quick enough, though.'<>"))
                                 time.sleep(2.6)
                                 fight_with_dracula(main_character, 0.5, 35)
                                 dracula.check_dracula_stats()
@@ -558,13 +559,13 @@ while True:
                                 display_stats()
                                 print("You raise your hand, ready to finish the monster once and for all.")
                                 time.sleep(0.3)
-                                print("'Wait!' she shouts.")
+                                print(ct.convert("<>magenta 'Wait!'<> she shouts."))
                                 time.sleep(0.3)
-                                print("You pause. 'You don't understand this,' she sputters. 'If you kill me,")
+                                print(ct.convert("You pause. <>magenta 'You don't understand this,'<> she sputters. <>magenta 'If you kill me,<>"))
                                 time.sleep(0.3)
-                                print("you'll never understand it. Spare me, and I'll show you things you've never")
+                                print(ct.convert("<>magenta you'll never understand it. Spare me, and I'll show you things you've never<>"))
                                 time.sleep(0.3)
-                                print("You stand in the armoury, surveying the carnage you've caused.")
+                                print("<>magenta imagined. Worlds - completely seperate from this one.'<>")
                                 time.sleep(7)
                                 dracula.check_dracula_stats()
                                 display_stats()
@@ -630,7 +631,7 @@ while True:
             while cell_room_user_input == "5":
                 print("You step closer, reading the quote plainly with your imporved vision.")
                 time.sleep(0.3)
-                print("'I'll tear spleens, defeat everything and this hell to get what I want.'")
+                print(ct.convert("<>yellow 'I'll tear spleens, defeat everything and this hell to get what I want.'<>"))
                 time.sleep(6)
                 break
             #Option 6
