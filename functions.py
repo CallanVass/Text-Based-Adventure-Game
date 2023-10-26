@@ -1,4 +1,4 @@
-#IMPORTS
+# IMPORTS
 from classes import *
 import time
 import random
@@ -8,7 +8,7 @@ from colour_text import ColourText
 ct = ColourText()
 ct.initTerminal()
 
-#GLOBAL FLAG VARIABLES
+# GLOBAL FLAG VARIABLES
 cell_door_open = False
 prisoners_free = False
 servant_killed = False
@@ -30,7 +30,7 @@ dracula_killed = False
 dracula_chambers_entered = False
 attack_counter = 0
 
-#ROOM OBJECTS
+# ROOM OBJECTS
 cell = Room("Cell", [])
 jail = Room("Jail", [])
 treasury = Room("Treasury", [])
@@ -40,19 +40,19 @@ dracula_chambers = Room("Final Chambers", [])
 prompt = "What do you want to do?"
 end = Room("End", [])
 
-#DEFINING MAIN CHARACTER AND NOTEBOOK
+# DEFINING MAIN CHARACTER AND NOTEBOOK
 notebook = Notebook()
 main_character = Character("Argus")
 dracula = Character("Dracula")
 
-#APPEND NOTEBOOK
+# APPEND NOTEBOOK
 def append_arm():
     notebook = Notebook()
     notebook.read_notebook()
     notebook.write_notebook()
     return
 
-#APPEND FUCTION ATTACHED TO INSTANCES OF USER INPUT
+# APPEND FUCTION ATTACHED TO INSTANCES OF USER INPUT
 def can_write(input):
     if main_character.inv.has_item("Bone Pen"):
         if input == "write" or input == "Write":
@@ -60,7 +60,7 @@ def can_write(input):
         else:
             pass
 
-#OPTIONS FUNCTION
+# OPTIONS FUNCTION
 def options(option_list, room):
     time.sleep(0.3)
     room.get_name()
@@ -69,45 +69,43 @@ def options(option_list, room):
         time.sleep(0.2)
     return
 
-#DISPLAY CHARACTER STATS
+# DISPLAY CHARACTER STATS
 def display_stats():
     print(main_character.check_stats())
     print(prompt)
     return
 
-#ADD NEW PROMPT/REMOVE OLD PROMPT
-def remove_last_option(prompt_list, new_prompt):
-    prompt_list.pop()
-    prompt_list.append(new_prompt)
-
-#CHECKING CHARACTER HEALTH FUNCTION
+# CHECKING CHARACTER HEALTH FUNCTION
 def check_character_health():
     if main_character.health <= 0:
         you_died()
         time.sleep(5)
         ask_if_play_again()
 
-#FOUND BY 1 GUARD FUNCTION (TREASURY AND ARMOURY)
+# FOUND BY 1 GUARD FUNCTION (TREASURY AND ARMOURY)
 def attacked_by_one_guard(time_limit_for_sequence, room):
     time.sleep(1.5)
     quick_time_event(main_character, time_limit_for_sequence, 30, room)
 
-#RESTART PROGRAM FUNCTION
+# RESTART PROGRAM FUNCTION
 def restart_program():
     subprocess.run(["python", "main.py"])
 
-#ASK TO PLAY AGAIN FUNCTION
+# ASK TO PLAY AGAIN FUNCTION
 def ask_if_play_again():
-    print("Would you like to play again?")
-    options(end_prompt_list, end)
-    end_user_input = input(">>> ")
-    if end_user_input == "1":
-        restart_program()
-    elif end_user_input == "2":
-        print("Thanks for playing!")
-        raise SystemExit
+    while True:
+        print("Would you like to play again?")
+        options(end_prompt_list, end)
+        end_user_input = input(">>> ")
+        if end_user_input == "1":
+            restart_program()
+        elif end_user_input == "2":
+            print("Thanks for playing!")
+            raise SystemExit
+        else:
+            print("Please enter a valid value.")
 
-#CHANCE FUNCTION
+# CHANCE FUNCTION
 def chance_of_success(percentage):
     random_nums = [random.randint(1, 10) for _ in range(percentage)]
     if percentage == 1:
@@ -128,14 +126,14 @@ def chance_of_success(percentage):
     if percentage >= 4:
         print("Callan, you turd, that's a stupidly high percentage. Change it right now.")
 
-#FIGHT EVENT FUNCTION
+# FIGHT EVENT FUNCTION
 def quick_time_event(character, time_limit, health_lost, room):
     enemy_killed = False
     quick_time_prompt_list = ["Drain them dry!",
-                                "Knock them unconscious!"]
-    while enemy_killed == False:
+                            "Knock them unconscious!"]
+    while enemy_killed is False:
         start = time.time()
-        quick_user_input = input(f"Quickly, press Enter!: ")
+        quick_user_input = input(f"Quickly, press Enter! ")
         end = time.time()
         time_passed = end - start
         if quick_user_input == "" and time_passed < time_limit:
@@ -153,14 +151,16 @@ def quick_time_event(character, time_limit, health_lost, room):
                 print("You throw the body aside, refusing to indulge in your dark desires!")
                 enemy_killed = True
                 break
+            else:
+                print("Please enter a valid value.")
         if quick_user_input == "" and time_passed > time_limit:
             character.lose_health(health_lost)
             check_character_health()
 
-#DRACULA FIGHT EVENT FUNCTION
+# DRACULA FIGHT EVENT FUNCTION
 def fight_with_dracula(character, time_limit, health_lost):
     start = time.time()
-    quick_user_input = input(f"Quickly press Enter to fight back: ")
+    quick_user_input = input(f"Quickly press Enter! ")
     end = time.time()
     time_passed = end - start
     global attack_counter
@@ -216,7 +216,7 @@ def fight_with_dracula(character, time_limit, health_lost):
             check_character_health()
             break
 
-#INTRO FUNCTION 
+# INTRO FUNCTION 
 def intro():
     print("You awaken in a castle cell. Blood drips steadily from the bricks above, splashing into a rusty basin.")
     time.sleep(2)
@@ -234,7 +234,7 @@ def intro():
     time.sleep(0.3)
     print("What's happening to you?")
 
-#BELOW ARE ENDING FUCTIONS. TITLES ARE INDICATIVE
+# BELOW ARE ENDING FUCTIONS. TITLES ARE INDICATIVE
 def self_bludgeon_ending():
     print("The thought of actually trying makes you extremely fed up.")
     time.sleep(0.3)
@@ -246,12 +246,11 @@ def self_bludgeon_ending():
     time.sleep(0.3)
     print("doofus.")
     time.sleep(12)
-    #CREDITS GO HERE
     notebook.reset_notebook()
     ask_if_play_again()
 
 def ominous_spirit_stare_ending():
-    if prisoners_free == False:
+    if prisoners_free is False:
         print("'Oh, for fucks sake!' the spirit rages. 'How can one little human be so annoying?!'")
         time.sleep(0.3)
         print("'Fine, go through. See if I care. Just stop staring at me. Please.'")
@@ -264,7 +263,6 @@ def ominous_spirit_stare_ending():
         time.sleep(0.3)
         print("You're free.")
         time.sleep(15)
-        #CREDITS GO HERE
         notebook.reset_notebook()
         ask_if_play_again()
     else:
@@ -284,12 +282,11 @@ def ominous_spirit_stare_ending():
         time.sleep(0.3)
         print("Your heart unclenches.")
         time.sleep(15)
-        #CREDITS GO HERE
         notebook.reset_notebook()
         ask_if_play_again()
         
 def ominous_spirit_riddle_ending():
-    if prisoners_free == False:
+    if prisoners_free is False:
         print("If the spirit had a brow, it would be furrowed. He stands in silence for a moment, as ")
         time.sleep(0.3)
         print("though trying to figure out how you did it. After some time, he snaps out of it and his ")
@@ -312,7 +309,6 @@ def ominous_spirit_riddle_ending():
         time.sleep(0.3)
         print("Your heart unclenches, and you move onwards, propelled by the Ominous Spirit's blessing.")
         time.sleep(18)
-        #CREDITS GO HERE
         notebook.reset_notebook()
         ask_if_play_again()
     else:
@@ -344,12 +340,11 @@ def ominous_spirit_riddle_ending():
         time.sleep(0.3)
         print("Your heart unclenches, and you move onwards, propelled by the Ominous Spirit's blessing.")
         time.sleep(20)
-        #CREDITS GO HERE
         notebook.reset_notebook()
         ask_if_play_again()
 
 def main_door_full_blood_glut_ending():
-    if prisoners_free == False:
+    if prisoners_free is False:
         print("First, you free the prisoners with your immense strength.")
         time.sleep(0.3)
     print("You look back at the wretched place that contained you for so long, wondering if setting ")
@@ -364,7 +359,6 @@ def main_door_full_blood_glut_ending():
     time.sleep(0.3)
     print("The last thing you remember is the unbearably hot sun beating down, melting your flesh...")
     time.sleep(18)
-    #ASCII ART GOES HERE "THE END"
     notebook.reset_notebook()
     ask_if_play_again()
 
@@ -383,7 +377,6 @@ def main_door_ending_with_key():
     time.sleep(0.3)
     print("You smile. It's finally over.")
     time.sleep(18)
-    #ASCII ART GOES HERE "THE END"
     notebook.reset_notebook()
     ask_if_play_again()
 
@@ -402,7 +395,6 @@ def main_door_ending_without_key():
     time.sleep(0.3)
     print("You smile. It's finally over.")
     time.sleep(18)
-    #ASCII ART GOES HERE "THE END"
     notebook.reset_notebook()
     ask_if_play_again()
 
@@ -421,11 +413,10 @@ def dracula_spared_ending():
     time.sleep(0.3)
     print("You've become a prince of darkness.")
     time.sleep(18)
-    #ASCII ART GOES HERE "THE END"
     notebook.reset_notebook()
     ask_if_play_again()
 
-#ASCII ART FUNCTIONS
+# ASCII ART FUNCTIONS
 def draculas_castle():
     print(ct.convert("<>magenta ▓█████▄  ██▀███   ▄▄▄       ▄████▄   █    ██  ██▓    ▄▄▄        ██████     ▄████▄   ▄▄▄        ██████ ▄▄▄█████▓ ██▓    ▓█████  ▐██▌ <>"))
     print(ct.convert("<>magenta ▒██▀ ██▌▓██ ▒ ██▒▒████▄    ▒██▀ ▀█   ██  ▓██▒▓██▒   ▒████▄    ▒██    ▒    ▒██▀ ▀█  ▒████▄    ▒██    ▒ ▓  ██▒ ▓▒▓██▒    ▓█   ▀  ▐██▌ <>"))
@@ -450,8 +441,8 @@ def you_died():
     print(ct.convert("<>red  ░ ░         ░ ░     ░           ░     ░     ░  ░   ░    <>"))
     print(ct.convert("<>red  ░ ░                           ░                  ░      <>"))
 
-#OPTION LISTS FOR EACH ROOM
-#CELL LISTS
+# OPTION LISTS FOR EACH ROOM
+# CELL LISTS
 cell_prompt_list_1_1 = ["Examine the pile of bones.", 
                 "Examine the bloody basin.", 
                 "Listen out to the calls of the prisoners.", 
@@ -467,7 +458,7 @@ cell_prompt_list_2_1 = ["Take a sip",
                       "Bludgeon yourself on the basin.",
                       "Go back"]
 
-#CELL ROOM LISTS
+# CELL ROOM LISTS
 cell_room_prompt_list_1_1 = ["Enter Treasury Room.",
                              "Free the prisoners.",
                              "Enter Armoury. (* 100% chance of conflict *)",
@@ -482,7 +473,7 @@ cell_room_prompt_list_1_2 = ["Enter Treasury Room.",
                              "Check engraving on the door.",
                              "Go back into the Cell"]
 
-#TREASURY LISTS
+# TREASURY LISTS
 treasury_prompt_list_1_1 = ["Drain the servant",
                              "Examine the gold coins",
                              "Knock the servant unconscious",
@@ -501,7 +492,7 @@ treasury_prompt_list_1_3_1 = ["Step over the gold and enter the door.",
                              "Check the letter on the table besides the door.",
                              "Go back."]
 
-#TUNNEL LISTS
+# TUNNEL LISTS
 tunnel_prompt_list_1 = ["Venture down the tunnel.",
                              "Go back."]
 tunnel_prompt_list_2 = ["Bow before the figure.",
@@ -514,7 +505,7 @@ tunnel_prompt_list_2_1 = ["Bow before the figure.",
                         "Stand and stare in awkward silence.",
                         "Go back."]
 
-#ARMOURY LISTS
+# ARMOURY LISTS
 armoury_prompt_list_1 = ["Charge the men head on."]
 
 armoury_prompt_list_2 = ["Back into the doorway to draw them in one at a time.",
@@ -524,7 +515,7 @@ armoury_prompt_list_3 = ["Go forward to Dracula's Chambers.",
                          "Loot the soldier's bodies.",
                          "Go back."]
 
-#DRACULA'S ROOM LISTS
+# DRACULA'S ROOM LISTS
 dracula_prompt_list_1 = ["'You deserve to die for what you've done to these people.'",
                          "'You've lived for long enough, don't you think?'",
                          "'Actually, I've left a pile of bodies behind me the whole way here. I have zero moral agency.'",
@@ -542,7 +533,7 @@ dracula_prompt_list_2_1 = ["'There is no redemption for you!' (Kill Dracula)",
 
 dracula_prompt_list_3 = ["Exit the room."]
 
-#END PROMPT LIST
+# END PROMPT LIST
 end_prompt_list = ["Yes",
                    "No"]
 

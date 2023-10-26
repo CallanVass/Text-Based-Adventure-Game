@@ -4,8 +4,6 @@ import time
 from functions import *
 from colour_text import ColourText
 
-
-
 # INTRODUCTION
 draculas_castle()
 time.sleep(2)
