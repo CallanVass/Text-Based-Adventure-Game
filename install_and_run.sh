@@ -25,6 +25,10 @@ else
     echo "requirements.txt file not found. Skipping package installation."
 fi
 
+source classes.py
+source functions.py
+source notebook.txt
+
 # Running Main
 if [ -f main.py ]; then
     echo "Running main.py..."
