@@ -66,7 +66,7 @@ Styling convention follows what is essentially PEP8, but simplified.
 - Ensure there are options that player cannot complete if blood_glut_meter isn't high enough (e.g freeing the slaves). if blood_glut_meter < 50, can't complete action.
 
 
-### Feature 3 -- Multiple Rooms/Ways To Escape
+### Feature 3 -- Multiple Endings/Ways To Escape
 
 - Create Room class to contain individual rooms to certain blocks of code. class = Room
 
@@ -79,5 +79,23 @@ Styling convention follows what is essentially PEP8, but simplified.
 - Attach the inventory class to the rooms for items that can be picked up. I'll do this by using comprehension. E.g self.inv = Inventory[]
 
 
-TODO: TALK ABOUT THE OTHER FEATURES ONCE THEY'RE CONFIRMED TO HAVE BEEN BUILT
+#### Testing These Features:
+
+ - Test 1: Blood Glut Meter
+
+ To test the Blood Glut Meter is working as planned, I have gone to each instance where the Meter can be increased and ensured the amount increase displayed on screen corresponds with the amount added to the Meter.
+ 
+ I have also tested the Meter doesn't increase by more than 100 by A: creating an if statement that dictates that if the Meter goes over 100, it will set it to 100 automatically. This can be found on line 32 of the classes.py file.
+ 
+ On top of both of these, I have have tested out options that are denied if the Meter is above a certain threshold. One example of this is killing the servant in the Treasury and then asking the Ominous Spirit in the Tunnel area to let you pass. While the Meter is equal to or above 50, the Spirit will not allow you to attempt to answer the riddle. I have confirmed this myself multiple times.
+
+
+ - Test 2: Multiple Endings/Ways to Escape
+
+To test the games endings function as they should, I have gone through each and every single one to make sure the ending displayed corresponds correctly with the actions the user has taken throughout the game. 
+
+This includes endings such as the 'blugeon self' ending, where the character simply ends the game early, the ending where Dracula is killed by the player, the ending where the player spares Dracula, the ending where the player is let past the Ominous Spirit due to answering the riddle, another where the Ominous Spirit lets the player by due to being annoyed with their staring. 
+
+On top of these, I have ensured that the endings change when certain boolean values are True or False - such as changes in the endings due to having freed the prisoners or not.
+
 ## R8 Installation instructions:

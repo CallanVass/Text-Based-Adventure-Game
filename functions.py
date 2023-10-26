@@ -32,11 +32,11 @@ attack_counter = 0
 
 #ROOM OBJECTS
 cell = Room("Cell", [])
-jail = Room("Jail", [""])
-treasury = Room("Treasury", ["Gold key"])
-tunnel = Room("Tunnel", [""])
-armoury = Room("Armoury", ["Sword"])
-dracula_chambers = Room("Final Chambers", ["Master Key"])
+jail = Room("Jail", [])
+treasury = Room("Treasury", [])
+tunnel = Room("Tunnel", [])
+armoury = Room("Armoury", [])
+dracula_chambers = Room("Final Chambers", [])
 prompt = "What do you want to do?"
 end = Room("End", [])
 
@@ -51,6 +51,7 @@ def append_arm():
     notebook.read_notebook()
     notebook.write_notebook()
     return
+
 #APPEND FUCTION ATTACHED TO INSTANCES OF USER INPUT
 def can_write(input):
     if main_character.inv.has_item("Bone Pen"):

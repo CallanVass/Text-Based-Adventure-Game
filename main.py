@@ -4,13 +4,15 @@ import time
 from functions import *
 from colour_text import ColourText
 
+
+
 # INTRODUCTION
 draculas_castle()
-time.sleep(3)
+time.sleep(2)
 intro()
 # MAIN LOOP
 while True:
-    # CELL LOGIC
+# CELL LOGIC
     display_stats()
     options(cell_prompt_list_1_1, cell)
     user_input = input(">>> ")
@@ -24,7 +26,6 @@ while True:
             time.sleep(0.3)
             print("Hmmm... If only you were stronger...")
             break
-
         elif main_character.bloodglut >= 20:
             print("You examine the pile of bones")
             options(cell_prompt_list_1_2, cell)
@@ -56,6 +57,8 @@ while True:
                 print("You go back.")
                 time.sleep(1)
                 break
+            else:
+                print("Please enter a valid value.")
     # Option 2
     while user_input == "2":
         print("You check the basin. The blood is as much mud as it is blood. You revolt.")
@@ -343,6 +346,7 @@ while True:
                                     treasury_guard_dead = True
                                 else:
                                     print("You dig some of the coins away without being heard!")
+                                    # print(dig_counter) TEST ONE
                                     time.sleep(2)
                                     dig_counter += 1
                                 break
@@ -616,3 +620,6 @@ while True:
                 exit_cell_room = True
         if exit_cell_room:
             break
+
+
+
