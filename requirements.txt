@@ -1,0 +1,2 @@
+colour-text==1.0.5
+pycodestyle==2.11.1

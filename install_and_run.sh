@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 
 # Python Installation
 if ! command -v python3 &>/dev/null; then
