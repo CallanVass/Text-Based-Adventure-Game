@@ -53,10 +53,8 @@ while True:
                     break
             if user_input_1_2 == "3":
                 print("You go back.")
-                time.sleep(1)
+                time.sleep(0.5)
                 break
-            else:
-                print("Please enter a valid value.")
     # Option 2
     while user_input == "2":
         print("You check the basin. The blood is as much mud as it is blood. You revolt.")
@@ -149,7 +147,7 @@ while True:
                     treasury_room_user_input = input(">>> ")
                     can_write(treasury_room_user_input)
                 while treasury_room_user_input == "1":
-                    if servant_killed is False:
+                    if servant_killed is False and servant_unconscious is False:
                         print("You sieze the servant, ripping into his neck and drinking deeply. With nobody to stop you,")
                         time.sleep(0.3)
                         print("you're able to drink your fill.")
@@ -166,6 +164,7 @@ while True:
                         time.sleep(0.3)
                         main_character.add_blood_glut(30)
                         servant_killed = True
+                        break
                     else:
                         print("He can't get any dead-er than he is.")
                         time.sleep(2)
@@ -407,6 +406,7 @@ while True:
                         # Option 1
                         while armoury_user_input_1 == "1":
                             print("You lunge at the closest one, who raises his sword in defense. You dodge.")
+                            time.sleep(1.5)
                             attacked_by_one_guard(1.4, armoury)
                             print("Done with the first one, the other two charge you.")
                             display_stats()
@@ -506,7 +506,7 @@ while True:
                                 time.sleep(1)
                                 print("In a blinding flash, she strikes out with her claws.")
                                 time.sleep(3)
-                                fight_with_dracula(main_character, 0.8, 35)
+                                fight_with_dracula(main_character, 0.8, 40)
                                 dracula.check_dracula_stats()
                                 display_stats()
                                 print(ct.convert("She backs up, eyes glued to you as she circles. <>magenta 'You think that was quick?'<> she asks."))
@@ -515,14 +515,14 @@ while True:
                                 time.sleep(0.3)
                                 print("A blinding attack comes for you.")
                                 time.sleep(7)
-                                fight_with_dracula(main_character, 0.5, 35)
+                                fight_with_dracula(main_character, 0.5, 40)
                                 dracula.check_dracula_stats()
                                 display_stats()
                                 print("She smiles and a spurt of blood jumps from her throat.")
                                 time.sleep(0.3)
                                 print(ct.convert("<>magenta 'You're quick. Not quick enough, though.'<>"))
                                 time.sleep(5)
-                                fight_with_dracula(main_character, 0.5, 35)
+                                fight_with_dracula(main_character, 0.5, 40)
                                 dracula.check_dracula_stats()
                                 display_stats()
                                 print("As she crashes into her throne, a serious gasp exits her mouth.")
@@ -535,7 +535,7 @@ while True:
                                 time.sleep(0.3)
                                 print("Like stray lightning, Dracula reaches for you.")
                                 time.sleep(10)
-                                fight_with_dracula(main_character, 0.3, 35)
+                                fight_with_dracula(main_character, 0.3, 40)
                                 dracula.check_dracula_stats()
                                 display_stats()
                                 print("You raise your hand, ready to finish the monster once and for all.")
@@ -546,7 +546,7 @@ while True:
                                 time.sleep(0.3)
                                 print(ct.convert("<>magenta you'll never understand it. Spare me, and I'll show you things you've never<>"))
                                 time.sleep(0.3)
-                                print("<>magenta imagined. Worlds - completely seperate from this one.'<>")
+                                print(ct.convert("<>magenta imagined. Worlds - completely seperate from this one.'<>"))
                                 time.sleep(7)
                                 dracula.check_dracula_stats()
                                 display_stats()
@@ -576,7 +576,6 @@ while True:
                                     time.sleep(2)
                                 else:
                                     break
-                                break
                         # Option 2
                         if armoury_user_input_3 == "2":
                             print("With thoughts of facing Dracula armed, you reach for their weapons and armour,")
@@ -618,6 +617,3 @@ while True:
                 exit_cell_room = True
         if exit_cell_room:
             break
-
-
-

@@ -136,6 +136,7 @@ def quick_time_event(character, time_limit, health_lost, room):
         quick_user_input = input(f"Quickly, press Enter! ")
         end = time.time()
         time_passed = end - start
+        global guard_killed_counter
         if quick_user_input == "" and time_passed < time_limit:
             print("What would you like to do?")
             options(quick_time_prompt_list, room)
@@ -144,15 +145,12 @@ def quick_time_event(character, time_limit, health_lost, room):
                 print("You feed, throwing the body aside like a wet blanket!")
                 main_character.add_blood_glut(10)
                 enemy_killed = True
-                global guard_killed_counter
                 guard_killed_counter += 1
                 break
             while quick_user_input_1 == "2":
                 print("You throw the body aside, refusing to indulge in your dark desires!")
                 enemy_killed = True
                 break
-            else:
-                print("Please enter a valid value.")
         if quick_user_input == "" and time_passed > time_limit:
             character.lose_health(health_lost)
             check_character_health()
@@ -371,7 +369,7 @@ def main_door_ending_with_key():
     time.sleep(0.3)
     print("wooden doors forward, stepping outside. Your skin tingles in the sunlight, a ghost of the ")
     time.sleep(0.3)
-    print("pain it might have caused you if you'd transitioned.The last thing you remember are the prisoners ")
+    print("pain it might have caused you if you'd transitioned. The last thing you remember are the prisoners ")
     time.sleep(0.3)
     print("rushing past you, free at last.")
     time.sleep(0.3)
