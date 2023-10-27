@@ -84,7 +84,7 @@ def check_character_health():
 
 # FOUND BY 1 GUARD FUNCTION (TREASURY AND ARMOURY)
 def attacked_by_one_guard(time_limit_for_sequence, room):
-    time.sleep(1.5)
+    time.sleep(3)
     quick_time_event(main_character, time_limit_for_sequence, 30, room)
 
 # RESTART PROGRAM FUNCTION

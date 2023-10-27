@@ -405,7 +405,7 @@ while True:
                         # Option 1
                         while armoury_user_input_1 == "1":
                             print("You lunge at the closest one, who raises his sword in defense. You dodge.")
-                            time.sleep(1.5)
+                            time.sleep(2.5)
                             attacked_by_one_guard(1.4, armoury)
                             print("Done with the first one, the other two charge you.")
                             display_stats()
@@ -417,7 +417,7 @@ while True:
                                 attacked_by_one_guard(1.4, armoury)
                                 display_stats()
                                 print("Done with the first, the other looks hesitant to approach you. You take the fight to him.")
-                                time.sleep(1)
+                                time.sleep(3)
                                 attacked_by_one_guard(1.7, armoury)
                                 display_stats()
                                 armoury_entered = True
@@ -471,7 +471,7 @@ while True:
                             can_write(dracula_chambers_user_input_3)
                             # Option 1
                             if dracula_chambers_user_input_3 == "1":
-                                print(ct.convert("<>magenta 'Do I really?'<> she asks. <>magenta 'People kill animals all the time. What's the difference?<>"))
+                                print(ct.convert("<>magenta 'Do I really?'<> she asks. <>magenta 'People kill animals all the time. What's the difference?'<>"))
                                 time.sleep(0.3)
                                 print("'People aren't animals, and they aren't slaves either. They want to live,' you")
                                 time.sleep(0.3)
