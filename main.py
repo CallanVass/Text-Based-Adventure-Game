@@ -111,9 +111,8 @@ while True:
             print("To your right is a door named 'Armoury'. Behind it, Dracula's guards laugh and joust.")
             time.sleep(0.3)
             print("Before you is a wide, closed door that appears to lead outside. Something is carved into it.")
-            cell_door_opened_once = True
         else:
-            if cell_door_opened_once:
+            if cell_door_open:
                 print("You step through the cell door without needing a key.")
                 time.sleep(2)
             else:
