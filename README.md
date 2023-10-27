@@ -2,10 +2,47 @@
 
 # **Spoilers Ahead**
 
-
 ## R3 Bibliography/References:
 
+ - Dewan, A 2022, Coding standards (style guide) for Python programs, www.tutorialspoint.com, viewed 19 October 2023, <https://www.tutorialspoint.com/coding-standards-style-guide-for-python-programs>.
 
+ - Feldhausen, R 2022, Nested While Loops :: Intro CS Textbook, textbooks.cs.ksu.edu, viewed 19 October 2023, <https://textbooks.cs.ksu.edu/cs-zero/x-cis115-labs/12-nested-loops/01-nested-while-loops/#:~:text=To%20create%20a%20nested%20loop>.
+
+ - How do I write a shell script to install a list of applications? 2021, Ask Ubuntu, viewed 26 October 2023, <https://askubuntu.com/questions/519/how-do-i-write-a-shell-script-to-install-a-list-of-applications>.
+
+ - InVision | Digital product design, workflow & collaboration 2018, InVision | Digital product design, workflow & collaboration, InVision, viewed 18 October 2023, <https://www.invisionapp.com/>.
+
+ - Lisowski, T 2021, How to Clone Using HTTPS in Git?, Blog | GitProtect.io, viewed 27 October 2023, <https://gitprotect.io/blog/how-to-clone-using-https-in-git/>.
+
+ - Panjak 2022, Python wait time, wait for user input | DigitalOcean, www.digitalocean.com, viewed 21 October 2023, <https://www.digitalocean.com/community/tutorials/python-wait-time-wait-for-input>.
+
+ - patorjk 2019, Text to ASCII Art Generator (TAAG), Patorjk.com, viewed 25 October 2023, <http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20>.
+
+ - Press enter to dodge... (Quick time event) [Python 3] 2020, Stack Overflow, viewed 21 October 2023, <https://stackoverflow.com/questions/64028801/press-enter-to-dodge-quick-time-event-python-3>.
+
+ - Python any() n.d., www.programiz.com, viewed 21 October 2023, <https://www.programiz.com/python-programming/methods/built-in/any>.
+
+ - Python Random Module 2023, www.w3schools.com, viewed 20 October 2023, <https://www.w3schools.com/python/module_random.asp>.
+
+ - Python time Module (with Examples) 2018, Programiz.com, viewed 21 October 2023, <https://www.programiz.com/python-programming/time>
+
+ - Ramakrishna, S 2021, How to Read Text File in Python? | HackerNoon, hackernoon.com, viewed 27 October 2023, <https://hackernoon.com/how-to-read-text-file-in-python>.
+
+ - Rocholl, JC 2023, pycodestyle: Python style guide checker, PyPI, viewed 25 October 2023, <https://pypi.org/project/pycodestyle/>.
+
+ - Scott, B 2023, colour-text: colour_text that makes printing coloured text easier to do on Unix, macOS and Windows, PyPI, viewed 25 October 2023, <https://pypi.org/project/colour-text/>.
+
+ - Singh, K 2023, What Is a Flag in While Loops? - AskPython, askpython.com, viewed 21 October 2023, <https://www.askpython.com/python/examples/flag-in-while-loops>.
+
+ - Taylor, D 2019, Writing Secure Shell Scripts | Linux Journal, www.linuxjournal.com, viewed 27 October 2023, <https://www.linuxjournal.com/content/writing-secure-shell-scripts>.
+
+ - van Rossum, G, Warsaw, B & Coghlan, N 2001, PEP 8 – Style Guide for Python Code | peps.python.org, peps.python.org, viewed 24 October 2023, <https://peps.python.org/pep-0008/>.
+
+ - W3Schools 2019, Python Classes, W3schools.com, viewed 18 October 2023, <https://www.w3schools.com/python/python_classes.asp>.
+
+ - w3schools 2023, Python While Loops, www.w3schools.com, viewed 19 October 2023, <https://www.w3schools.com/python/python_while_loops.asp>.
+
+ - What is a Shell Script and How Does it Work? 2019, Tech Target, viewed 27 October 2023, <https://www.techtarget.com/searchdatacenter/definition/shell-script>.
 
 ## R4 Github Link:
 
@@ -99,3 +136,55 @@ This includes endings such as the 'blugeon self' ending, where the character sim
 On top of these, I have ensured that the endings change when certain boolean values are True or False - such as changes in the endings due to having freed the prisoners or not.
 
 ## R8 Installation instructions:
+
+### System requirements:
+
+Most operating systems will run Python 3. In case you're curious, here is a list of requirements:
+ - Windows 7 or 11
+ - Mac OS X 10.11 or higher, 64-bit
+ - Linux: RHEL 6/7, 64-bit (almost all libraries also work in Ubuntu)
+ - x86 64-bit CPU (Intel / AMD architecture). ARM CPUs are not supported.
+ - 4 GB RAM
+ - 5 GB free disk space
+
+You may want to have more than this if you want a smoother experience.
+
+### Installation:
+
+#### Step 1:
+
+Which terminal to use?
+
+WINDOWS:
+
+First you'll want to install Ubuntu, which is an open source operating system on Linux. Essentially, this lets you run Linux (an operating system) on your own operating system by creating an miniature environment where that can safely happen.
+
+(If you're on windows, here is the installation link for the Microsoft Store.)[https://apps.microsoft.com/detail/9PDXGNCFSCZV?rtc=1&hl=en-au&gl=AU]
+
+Once you've installed Ubuntu, you will be prompted to create a username and password. It's advised you create a username and password you'll remember, as you may need it again in the future if you wish to use Linux again.
+
+MAC:
+
+If you're a Mac user, you can simply navigate to your own terminal.
+
+
+#### Step 2:
+
+Navitage to the GitHub repository and copy the text from the HTTPS submenu under the green code button. (Here is a link for those who've forgotten.)[https://github.com/CallanVass/Text-Based-Adventure-Game]
+
+![A picture of where to navigate on GitHub to download the repository.](images/githubscreenshot.png)
+
+Navigate to where you would like the file to be cloned into (placed into). You can make a new folder to put it in, or simply install it in the home directory, although it's highly recommended to create a new directory (folder).
+
+For Ubuntu users, this is achieved via the "mkdir" command, followed by the name you wish to use for the folder. E.g "mkdir game" to create a new directory named "game".
+
+TODO FIND OUT HOW TO CREATE DIRECTORY FOR MAC USERS
+
+Once you're in the directory you want to use, enter the command "git clone https://github.com/CallanVass/Text-Based-Adventure-Game.git". Simply put, all you need to type is "git clone" followed by the link you've just copied from the submenu.
+
+#### Step 3:
+
+Once you've done this, navigate into the folder itself. You'll see a few different files, however all you need to do is enter this command: "./install_and_run.sh". This command will check you have Python installed, and if you don't it will do the installation for you. It will do the same with the dependencies of the project, so there's no need to lift a finger. After that, it will run the game. Simple as that. 
+
+If you ever wish to run the game again, simply enter that same command.
+
