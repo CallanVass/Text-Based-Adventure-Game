@@ -139,13 +139,18 @@ On top of these, I have ensured that the endings change when certain boolean val
 ## Tracking implementation of features:
 
 All images tracking the implementaion plan can be found in the images folder. I will add some here, but for brevity's sake, most will reside within the images folder.
-![A screenshot of the implementation.](images/Screenshot%202023-10-20%20092641.png)
 
-![A screenshot of the implementation.](images/Screenshot%202023-10-22%20102600.png)
+![A screenshot of my planning.](images/planning_screenshot.png)
 
-![A screenshot of the implementation.](images/Screenshot%202023-10-24%20075004.png)
+![A screenshot of the implementation.](images/screenshot_1.png)
 
-![A screenshot of the implementation.](images/Screenshot%202023-10-25%20142821.png)
+![A screenshot of the implementation.](images/screenshot_14.png)
+
+![A screenshot of the implementation.](images/screenshot_22.png)
+
+![A screenshot of the implementation.](images/screenshot_28.png)
+
+
 
 
 ## R8 Installation instructions:
@@ -201,5 +206,13 @@ If you ever wish to run the game again, simply enter that same command.
 
 You'll likely see something similar to this, but instead of informing you that you've got it installed, it will likely do the installation for you. You may have to enter your password to install the dependencies.
 
-![A picture of what the terminal might look like.](images/installation_guide.png)
+![A picture of what the terminal might look like.](images/terminal_screenshot.png)
+
+#### How to use:
+
+Dracula's Castle is a text-based adventure game where the user picks from a number of options each turn, which dictate what the character of the game will do. Options usually range between 1 and 6, and all the user need do is type the number of the action they wish to complete and hit the Enter key.
+
+Sometimes the game will prompt conflict, and it will initiate a time-based user reaction (sort of like a quick-time event) that prompts the user to hit Enter to fight. With these events, you must be quick. Especially with the final fight. Sometimes if you fail you will be prompted again immediately. Ensure you react quickly and press Enter once more, or risk losing more health!
+
+Throughout the game you will be able to make deciscions that lead to you having higher blood glut. Usually, this means killing people. Having a higher blood glut will cancel you out from completing certain tasks, but it will open many more doors than it closes. Keep this in mind.
 
