@@ -157,7 +157,7 @@ Which terminal to use?
 
 WINDOWS:
 
-First you'll want to install Ubuntu, which is an open source operating system on Linux. Essentially, this lets you run Linux (an operating system) on your own operating system by creating an miniature environment where that can safely happen.
+First you'll want to install Ubuntu, which is a subsytem of Linux for Windows. Essentially, this lets you run Linux (an operating system) on your own operating system by creating an miniature environment where that can safely happen.
 
 (If you're on windows, here is the installation link for the Microsoft Store.)[https://apps.microsoft.com/detail/9PDXGNCFSCZV?rtc=1&hl=en-au&gl=AU]
 
@@ -174,17 +174,19 @@ Navitage to the GitHub repository and copy the text from the HTTPS submenu under
 
 ![A picture of where to navigate on GitHub to download the repository.](images/githubscreenshot.png)
 
-Navigate to where you would like the file to be cloned into (placed into). You can make a new folder to put it in, or simply install it in the home directory, although it's highly recommended to create a new directory (folder).
+Navigate to where you would like the file to be cloned into (placed) using the "cd" function. E.g "cd thisfolder". You can make a new folder to put it in, or simply install it in the home directory, although it's highly recommended to create a new directory (folder).
 
-For Ubuntu users, this is achieved via the "mkdir" command, followed by the name you wish to use for the folder. E.g "mkdir game" to create a new directory named "game".
+For Ubuntu and Mac users alike, this is achieved via the "mkdir" command, followed by the name you wish to use for the folder. E.g "mkdir game" to create a new directory named "game".
 
-TODO FIND OUT HOW TO CREATE DIRECTORY FOR MAC USERS
-
-Once you're in the directory you want to use, enter the command "git clone https://github.com/CallanVass/Text-Based-Adventure-Game.git". Simply put, all you need to type is "git clone" followed by the link you've just copied from the submenu.
+Once you're in the directory you want to use, enter the command "git clone https://github.com/CallanVass/Text-Based-Adventure-Game.git". Simply put, all you need to type is "git clone" followed by the link you've just copied from the submenu in GitHub. Then simply hit enter.
 
 #### Step 3:
 
 Once you've done this, navigate into the folder itself. You'll see a few different files, however all you need to do is enter this command: "./install_and_run.sh". This command will check you have Python installed, and if you don't it will do the installation for you. It will do the same with the dependencies of the project, so there's no need to lift a finger. After that, it will run the game. Simple as that. 
 
 If you ever wish to run the game again, simply enter that same command.
+
+You'll likely see something similar to this, but instead of informing you that you've got it installed, it will likely do the installation for you. You may have to enter your password to install the dependencies.
+
+![A picture of what the terminal might look like.](images.installation_guide.png)
 
