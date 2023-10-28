@@ -523,7 +523,7 @@ dracula_prompt_list_1 = ["'You deserve to die for what you've done to these peop
 dracula_prompt_list_2 = ["'You deserve to die for what you've done to these people.'",
                          "'You've lived for long enough, don't you think?'",
                          "'I'm not entirely exempt, either. But you need to be stopped'",
-                         "'Enough chit chat. Let's fight.'",
+                         "'Enough chit chat. Let's fight.' (* 100% chance of conflict *)",
                          "Go back."]
 
 dracula_prompt_list_2_1 = ["'There is no redemption for you!' (Kill Dracula)",
