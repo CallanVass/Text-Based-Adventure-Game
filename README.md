@@ -140,7 +140,7 @@ On top of these, I have ensured that the endings change when certain boolean val
 ### System requirements:
 
 Most operating systems will run Python 3. In case you're curious, here is a list of requirements:
- - Windows 7 or 11
+ - Windows 7 or higher (preferably higher)
  - Mac OS X 10.11 or higher, 64-bit
  - Linux: RHEL 6/7, 64-bit (almost all libraries also work in Ubuntu)
  - x86 64-bit CPU (Intel / AMD architecture). ARM CPUs are not supported.
@@ -165,7 +165,7 @@ Once you've installed Ubuntu, you will be prompted to create a username and pass
 
 MAC:
 
-If you're a Mac user, you can simply navigate to your own terminal.
+If you're a Mac user, you can simply navigate to your own Terminal app.
 
 
 #### Step 2:
@@ -174,7 +174,7 @@ Navitage to the GitHub repository and copy the text from the HTTPS submenu under
 
 ![A picture of where to navigate on GitHub to download the repository.](images/githubscreenshot.png)
 
-Navigate to where you would like the file to be cloned into (placed) using the "cd" function. E.g "cd thisfolder". You can make a new folder to put it in, or simply install it in the home directory, although it's highly recommended to create a new directory (folder).
+Navigate to where you would like the file to be cloned into (placed) using the "cd" function (meaning change directory). E.g "cd thisfolder". You can make a new folder to put it in, or simply install it in the home directory, although it's highly recommended to create a new directory (folder).
 
 For Ubuntu and Mac users alike, this is achieved via the "mkdir" command, followed by the name you wish to use for the folder. E.g "mkdir game" to create a new directory named "game".
 
@@ -188,5 +188,5 @@ If you ever wish to run the game again, simply enter that same command.
 
 You'll likely see something similar to this, but instead of informing you that you've got it installed, it will likely do the installation for you. You may have to enter your password to install the dependencies.
 
-![A picture of what the terminal might look like.](images.installation_guide.png)
+![A picture of what the terminal might look like.](images/installation_guide.png)
 
