@@ -135,6 +135,19 @@ This includes endings such as the 'blugeon self' ending, where the character sim
 
 On top of these, I have ensured that the endings change when certain boolean values are True or False - such as changes in the endings due to having freed the prisoners or not.
 
+
+## Tracking implementation of features:
+
+All images tracking the implementaion plan can be found in the images folder. I will add some here, but for brevity's sake, most will reside within the images folder.
+![A screenshot of the implementation.](images/Screenshot%202023-10-20%20092641.png)
+
+![A screenshot of the implementation.](images/Screenshot%202023-10-22%20102600.png)
+
+![A screenshot of the implementation.](images/Screenshot%202023-10-24%20075004.png)
+
+![A screenshot of the implementation.](images/Screenshot%202023-10-25%20142821.png)
+
+
 ## R8 Installation instructions:
 
 ### System requirements:
