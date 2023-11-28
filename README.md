@@ -52,7 +52,7 @@
 
 ## R5 Style Guide:
 
-Styling convention follows what is essentially PEP8, but with the notable exception of line length among my lines of code. I would have fixed most of text into a seperate file, however I only learnt this much later in the project, without the time to fix it. I've set a ruler in my settings.json file to ensure it doesn't happen again.
+Styling convention follows what is essentially PEP8, but with the notable exception of line length among my lines of code. Modularising to a higher extent would fix this. I've set a ruler in my settings.json file to ensure it doesn't happen again.
 
 [Here is the guide](https://peps.python.org/pep-0008/)
 
