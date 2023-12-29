@@ -17,7 +17,15 @@ else
     echo "pip is already installed."
 fi
 
-#Requirements.txt Installation
+# Create and Activate Virtual Environment
+if [ ! -d venv ]; then
+    echo "Creating virtual environment..."
+    python3 -m venv venv
+fi
+
+source venv/bin/activate
+
+# Requirements.txt Installation
 if [ -f requirements.txt ]; then
     echo "Installing Python packages from requirements.txt..."
     pip3 install -r requirements.txt
@@ -36,4 +44,3 @@ if [ -f main.py ]; then
 else
     echo "main.py file not found. Skipping execution."
 fi
-
